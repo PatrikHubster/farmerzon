@@ -26,3 +26,9 @@ for repo in $REPOS ; do
         echo "$repo already exists. Continue with next."
     fi
 done
+
+if [ -d "farmerzon" ] ; then
+    unlink ../clone
+    ln -n ./farmerzon/clone-farmerzon.sh ../clone
+    ln -n farmerzon/docker-compose.yml docker-compose.yml
+fi

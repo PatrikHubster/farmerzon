@@ -68,7 +68,7 @@ services:
 
   worker_1:
     container_name: farmerzon_order_worker_1
-    build: ./farmerzon-order-worker/
+    build: ./farmerzon-worker/
     restart: always
     depends_on:
       - order_db
@@ -84,7 +84,7 @@ services:
       
   worker_2:
     container_name: farmerzon_order_worker_2
-    build: ./farmerzon-order-worker/
+    build: ./farmerzon-worker/
     restart: always
     depends_on:
       - order_db
@@ -100,7 +100,7 @@ services:
       
   worker_3:
     container_name: farmerzon_order_worker_3
-    build: ./farmerzon-order-worker/
+    build: ./farmerzon-worker/
     restart: always
     depends_on:
       - order_db
@@ -116,7 +116,7 @@ services:
       
   worker_4:
     container_name: farmerzon_order_worker_4
-    build: ./farmerzon-order-worker/
+    build: ./farmerzon-worker/
     restart: always
     depends_on:
       - order_db
@@ -132,7 +132,7 @@ services:
 
   articles:
     container_name: farmerzon_articles
-    build: ./farmerzon/.
+    build: ./farmerzon-articles/.
     ports:
       - 5002:5001
     depends_on: 
