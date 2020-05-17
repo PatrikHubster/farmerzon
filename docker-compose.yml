@@ -40,95 +40,95 @@ services:
     networks:
       - auth_db
       
-  order_db:
-    container_name: farmerzon_order_db
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=admin123
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=order
-    volumes:
-      - ./db-order/:/var/lib/postgresql/data
-      - ./farmerzon/config/order_public_cars.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - 5431:5432
-    networks:
-      - order_db
-
-  rabbitmq:
-    container_name: farmerzon_rabbitmq
-    image: rabbitmq:management
-    ports:
-      - 5672:5672
-      - 15672:15672
-    networks:
-      - rabbitmq
-    volumes:
-      - ./rabbitmq/:/var/lib/rabbitmq
-
-  worker_1:
-    container_name: farmerzon_order_worker_1
-    build: ./farmerzon-worker/
-    restart: always
-    depends_on:
-      - order_db
-      - rabbitmq
-      - articles
-    environment:
-      - CAR_ID=1
-      - DATABASE_URL=order_db
-    networks:
-      - worker_1
-      - order_db
-      - rabbitmq
-      
-  worker_2:
-    container_name: farmerzon_order_worker_2
-    build: ./farmerzon-worker/
-    restart: always
-    depends_on:
-      - order_db
-      - rabbitmq
-      - articles
-    environment:
-      - CAR_ID=2
-      - DATABASE_URL=order_db
-    networks:
-      - worker_2
-      - order_db
-      - rabbitmq
-      
-  worker_3:
-    container_name: farmerzon_order_worker_3
-    build: ./farmerzon-worker/
-    restart: always
-    depends_on:
-      - order_db
-      - rabbitmq
-      - articles
-    environment:
-      - CAR_ID=3
-      - DATABASE_URL=order_db
-    networks:
-      - worker_3
-      - order_db
-      - rabbitmq
-      
-  worker_4:
-    container_name: farmerzon_order_worker_4
-    build: ./farmerzon-worker/
-    restart: always
-    depends_on:
-      - order_db
-      - rabbitmq
-      - articles
-    environment:
-      - CAR_ID=4
-      - DATABASE_URL=order_db
-    networks:
-      - worker_4
-      - order_db
-      - rabbitmq
+#  order_db:
+#    container_name: farmerzon_order_db
+#    image: postgres
+#    environment:
+#      - POSTGRES_PASSWORD=admin123
+#      - POSTGRES_USER=admin
+#      - POSTGRES_DB=order
+#    volumes:
+#      - ./db-order/:/var/lib/postgresql/data
+#      - ./farmerzon/config/order_public_cars.sql:/docker-entrypoint-initdb.d/init.sql
+#    ports:
+#      - 5431:5432
+#    networks:
+#      - order_db
+#
+#  rabbitmq:
+#    container_name: farmerzon_rabbitmq
+#    image: rabbitmq:management
+#    ports:
+#      - 5672:5672
+#      - 15672:15672
+#    networks:
+#      - rabbitmq
+#    volumes:
+#      - ./rabbitmq/:/var/lib/rabbitmq
+#
+#  worker_1:
+#    container_name: farmerzon_order_worker_1
+#    build: ./farmerzon-worker/
+#    restart: always
+#    depends_on:
+#      - order_db
+#      - rabbitmq
+#      - articles
+#    environment:
+#      - CAR_ID=1
+#      - DATABASE_URL=order_db
+#    networks:
+#      - worker_1
+#      - order_db
+#      - rabbitmq
+#
+#  worker_2:
+#    container_name: farmerzon_order_worker_2
+#    build: ./farmerzon-worker/
+#    restart: always
+#    depends_on:
+#      - order_db
+#      - rabbitmq
+#      - articles
+#    environment:
+#      - CAR_ID=2
+#      - DATABASE_URL=order_db
+#    networks:
+#      - worker_2
+#      - order_db
+#      - rabbitmq
+#
+#  worker_3:
+#    container_name: farmerzon_order_worker_3
+#    build: ./farmerzon-worker/
+#    restart: always
+#    depends_on:
+#      - order_db
+#      - rabbitmq
+#      - articles
+#    environment:
+#      - CAR_ID=3
+#      - DATABASE_URL=order_db
+#    networks:
+#      - worker_3
+#      - order_db
+#      - rabbitmq
+#
+#  worker_4:
+#    container_name: farmerzon_order_worker_4
+#    build: ./farmerzon-worker/
+#    restart: always
+#    depends_on:
+#      - order_db
+#      - rabbitmq
+#      - articles
+#    environment:
+#      - CAR_ID=4
+#      - DATABASE_URL=order_db
+#    networks:
+#      - worker_4
+#      - order_db
+#      - rabbitmq
 
   articles:
     container_name: farmerzon_articles
