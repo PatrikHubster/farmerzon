@@ -23,12 +23,18 @@ for repo in $REPOS ; do
         git config user.email $email
         cd ..
     else
-        echo "$repo already exists. Continue with next."
+        echo "$repo already exists. Checkout master and pull instead."
+        cd $repo
+        if git checkout master ; then
+            git pull
+        fi
+        cd ..
     fi
 done
 
 if [ -d "farmerzon" ] ; then
     unlink ../clone
+    unlink docker-compose.yml
     ln -n ./farmerzon/clone-farmerzon.sh ../clone
     ln -n farmerzon/docker-compose.yml docker-compose.yml
 fi
