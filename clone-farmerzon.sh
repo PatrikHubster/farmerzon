@@ -9,6 +9,7 @@ REPOS="${REPOS} farmerzon-articles"
 REPOS="${REPOS} farmerzon-worker"
 REPOS="${REPOS} farmerzon-frontend"
 REPOS="${REPOS} farmerzon-authentication"
+REPOS="${REPOS} farmerzon-alexa"
 
 dir='./farmerzon'
 if [ ! -d  $dir ] ; then
