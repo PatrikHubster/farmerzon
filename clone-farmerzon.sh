@@ -6,7 +6,7 @@ read email
 
 REPOS="farmerzon"
 REPOS="${REPOS} farmerzon-articles"
-REPOS="${REPOS} farmerzon-worker"
+REPOS="${REPOS} farmerzon-order"
 REPOS="${REPOS} farmerzon-frontend"
 REPOS="${REPOS} farmerzon-authentication"
 REPOS="${REPOS} farmerzon-alexa"
