@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-order
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: farmerzon-order
+  template:
+    metadata:
+      labels:
+        app: farmerzon-order
+    spec:
+      containers:
+        - name: farmerzon-order
+          image: lukbraun/farmerzon-order
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_HOSTNAME
+              value: farmerzon-order-db
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_DB
+              value: order
+            - name: PORT
+              value: "3000"
+            - name: DAYS_HIGHER
+              value: "20"
+            - name: DAYS_LOWER
+              value: "5"
+          imagePullPolicy: Always
