@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-articles
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: farmerzon-articles
+  template:
+    metadata:
+      labels:
+        app: farmerzon-articles
+    spec:
+      containers:
+        - name: farmerzon-articles
+          image: lukbraun/farmerzon-articles
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
