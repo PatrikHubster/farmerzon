@@ -1,0 +1,132 @@
+@startuml
+namespace FarmerzonArticles {
+
+	namespace FarmerzonArticlesDataAccessModel {
+
+		class Article
+		class Person
+		class Unit
+
+	}
+
+	namespace FarmerzonArticlesDataTransferModel {
+
+		class Article
+		class Person
+		class Unit
+
+	}
+
+	namespace FarmerzonArticlesDataAccess {
+
+		class FarmerzonArticlesContext
+
+		namespace Interface {
+
+			interface IArticleRepository
+			interface IPersonRepository
+			interface IUnitRepository
+
+		}
+
+		namespace Implementation {
+
+			class AbstractRepository
+			class ArticleRepository
+			class PersonRepository
+			class UnitRepository
+
+			AbstractRepository --> FarmerzonArticles.FarmerzonArticlesDataAccess.FarmerzonArticlesContext
+
+			ArticleRepository --|> AbstractRepository
+			PersonRepository --|> AbstractRepository
+			UnitRepository --|> AbstractRepository
+
+			ArticleRepository --|> FarmerzonArticles.FarmerzonArticlesDataAccess.Interface.IArticleRepository
+			PersonRepository --|> FarmerzonArticles.FarmerzonArticlesDataAccess.Interface.IPersonRepository
+			UnitRepository --|> FarmerzonArticles.FarmerzonArticlesDataAccess.Interface.IUnitRepository
+
+			ArticleRepository --> FarmerzonArticles.FarmerzonArticlesDataAccessModel.Article
+			PersonRepository --> FarmerzonArticles.FarmerzonArticlesDataAccessModel.Person
+			UnitRepository --> FarmerzonArticles.FarmerzonArticlesDataAccessModel.Unit
+
+		}
+	}
+
+	namespace FarmerzonArticlesManager {
+
+		namespace Interface {
+
+			interface IArticleManager
+			interface IPersonManager
+			interface IUnitManager
+		
+		}
+
+		namespace Mapper {
+
+			class AutoMapper
+
+		}
+
+		namespace Implementation {
+
+			class AbstractManager
+			class ArticleManager
+			class PersonManager
+			class UnitManager
+
+			AbstractManager --> FarmerzonArticles.FarmerzonArticlesManager.Mapper.AutoMapper
+
+			ArticleManager --|> AbstractManager
+			PersonManager --|> AbstractManager
+			UnitManager --|> AbstractManager
+
+			ArticleManager --|> FarmerzonArticles.FarmerzonArticlesManager.Interface.IArticleManager
+			PersonManager --|> FarmerzonArticles.FarmerzonArticlesManager.Interface.IPersonManager
+			UnitManager --|> FarmerzonArticles.FarmerzonArticlesManager.Interface.IUnitManager
+
+			ArticleManager --> FarmerzonArticles.FarmerzonArticlesDataAccess.Interface.IArticleRepository
+			PersonManager --> FarmerzonArticles.FarmerzonArticlesDataAccess.Interface.IPersonRepository
+			UnitManager --> FarmerzonArticles.FarmerzonArticlesDataAccess.Interface.IUnitRepository
+		
+			ArticleManager --> FarmerzonArticles.FarmerzonArticlesDataTransferModel.Article
+			PersonManager --> FarmerzonArticles.FarmerzonArticlesDataTransferModel.Person
+			UnitManager --> FarmerzonArticles.FarmerzonArticlesDataTransferModel.Unit
+
+		}
+	}
+
+	namespace FarmerzonArticlesPresentationLayer {
+
+		namespace Controller {
+
+			class GraphController
+
+		}
+
+		namepsace GraphControllerType {
+
+		}
+
+		namespace GraphOutputType {
+			
+			class ArticleOutputType
+			class PersonType
+			class UnitType
+
+		}
+
+		namespace GraphInputType {
+
+			class ArticleInputType
+			class UnitInputType
+
+		}
+
+		class Startup
+		class Programm
+
+	}
+}
+@enduml

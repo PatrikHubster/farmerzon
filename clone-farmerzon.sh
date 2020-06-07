@@ -5,7 +5,9 @@ echo -n "> "
 read email
 
 REPOS="farmerzon"
+REPOS="${REPOS} farmerzon-address"
 REPOS="${REPOS} farmerzon-articles"
+REPOS="${REPOS} farmerzon-backend"
 REPOS="${REPOS} farmerzon-order"
 REPOS="${REPOS} farmerzon-frontend"
 REPOS="${REPOS} farmerzon-authentication"
