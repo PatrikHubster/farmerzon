@@ -1,184 +1,37 @@
 version: "3"
 
 services:
-  nginx:
-    container_name: farmerzon_nginx
-    image: nginx
-    ports:
-      - 8080:80
-    volumes:
-      - ./farmerzon/config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    networks:
-      - nginx
-      - authentication
-      - articles
-      - frontend
-    
-  authentication:
-    container_name: farmerzon_auth
+  farmerzon-authentication:
+    container_name: farmerzon-authentication
     build: ./farmerzon-authentication/.
-    ports:
+    ports: 
       - 5000:5000
-    depends_on:
-      - auth_db
-    networks:
-      - authentication
-      - auth_db
-      - rabbitmq
 
-  auth_db:
-    container_name: farmerzon_auth_db
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=Password
-      - POSTGRES_USER=authentication_user
-      - POSTGRES_DB=authentication
-    volumes:
-      - ./db-auth/:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    networks:
-      - auth_db
-      
-#  order_db:
-#    container_name: farmerzon_order_db
-#    image: postgres
-#    environment:
-#      - POSTGRES_PASSWORD=admin123
-#      - POSTGRES_USER=admin
-#      - POSTGRES_DB=order
-#    volumes:
-#      - ./db-order/:/var/lib/postgresql/data
-#      - ./farmerzon/config/order_public_cars.sql:/docker-entrypoint-initdb.d/init.sql
-#    ports:
-#      - 5431:5432
-#    networks:
-#      - order_db
-#
-#  rabbitmq:
-#    container_name: farmerzon_rabbitmq
-#    image: rabbitmq:management
-#    ports:
-#      - 5672:5672
-#      - 15672:15672
-#    networks:
-#      - rabbitmq
-#    volumes:
-#      - ./rabbitmq/:/var/lib/rabbitmq
-#
-#  worker_1:
-#    container_name: farmerzon_order_worker_1
-#    build: ./farmerzon-worker/
-#    restart: always
-#    depends_on:
-#      - order_db
-#      - rabbitmq
-#      - articles
-#    environment:
-#      - CAR_ID=1
-#      - DATABASE_URL=order_db
-#    networks:
-#      - worker_1
-#      - order_db
-#      - rabbitmq
-#
-#  worker_2:
-#    container_name: farmerzon_order_worker_2
-#    build: ./farmerzon-worker/
-#    restart: always
-#    depends_on:
-#      - order_db
-#      - rabbitmq
-#      - articles
-#    environment:
-#      - CAR_ID=2
-#      - DATABASE_URL=order_db
-#    networks:
-#      - worker_2
-#      - order_db
-#      - rabbitmq
-#
-#  worker_3:
-#    container_name: farmerzon_order_worker_3
-#    build: ./farmerzon-worker/
-#    restart: always
-#    depends_on:
-#      - order_db
-#      - rabbitmq
-#      - articles
-#    environment:
-#      - CAR_ID=3
-#      - DATABASE_URL=order_db
-#    networks:
-#      - worker_3
-#      - order_db
-#      - rabbitmq
-#
-#  worker_4:
-#    container_name: farmerzon_order_worker_4
-#    build: ./farmerzon-worker/
-#    restart: always
-#    depends_on:
-#      - order_db
-#      - rabbitmq
-#      - articles
-#    environment:
-#      - CAR_ID=4
-#      - DATABASE_URL=order_db
-#    networks:
-#      - worker_4
-#      - order_db
-#      - rabbitmq
-
-  articles:
-    container_name: farmerzon_articles
+  farmerzon-articles:
+    container_name: farmerzon-articles
     build: ./farmerzon-articles/.
     ports:
-      - 5002:5001
-    depends_on: 
-      - articles_db
-    networks:
-      - articles
-      - rabbitmq
-      - articles_db
+      - 5001:5000
 
-  articles_db:
-    container_name: farmerzon_articles_db
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=admin123
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=articles
-    volumes:
-      - ./db-articles/:/var/lib/postgresql/data
+  farmerzon-address:
+    container_name: farmerzon-address
+    build: ./farmerzon-address/.
     ports:
-      - 5430:5432
-    networks:
-      - articles_db
+      - 5002:5000
 
-  frontend:
-    container_name: farmerzon_frontend
+  farmerzon-backend:
+    container_name: farmerzon-backend
+    build: ./farmerzon-backend/.
+    ports:
+      - 5003:5000
+    environment:
+      - BaseUrls__FarmerzonAddress__Host=farmerzon-address
+      - BaseUrls__FarmerzonAddress__Port=5000
+      - BaseUrls__FarmerzonArticles__Host=farmerzon-articles
+      - BaseUrls__FarmerzonArticles__Port=5000
+
+  farmerzon-frontend:
+    container_name: farmerzon-frontend
     build: ./farmerzon-frontend/.
     ports:
-      - 3000:3000
-    depends_on:
-      - articles
-      - authentication
-    networks:
-      - frontend
-      - articles
-      - authentication
-  
-networks:
-  auth_db:
-  order_db:
-  articles_db:
-  rabbitmq:
-  authentication:
-  articles:
-  worker_1:
-  worker_2:
-  worker_3:
-  worker_4:
-  frontend:
-  nginx:
+      - 5004:3000
