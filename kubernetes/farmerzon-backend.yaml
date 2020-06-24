@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2020-06-13T20:59:20Z"
+  generation: 11
+  labels:
+    app: farmerzon-backend
+  name: farmerzon-backend
+  namespace: default
+  resourceVersion: "2881658"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/farmerzon-backend
+  uid: c07833b4-adb8-11ea-a449-42010a840185
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: farmerzon-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: farmerzon-backend
+    spec:
+      containers:
+      - env:
+        - name: BaseUrls__FarmerzonAddress__Host
+          valueFrom:
+            configMapKeyRef:
+              key: BaseUrls__FarmerzonAddress__Host
+              name: farmerzon-backend-config-rgwj
+        - name: BaseUrls__FarmerzonAddress__Port
+          valueFrom:
+            configMapKeyRef:
+              key: BaseUrls__FarmerzonAddress__Port
+              name: farmerzon-backend-config-rgwj
+        - name: BaseUrls__FarmerzonArticles__Host
+          valueFrom:
+            configMapKeyRef:
+              key: BaseUrls__FarmerzonArticles__Host
+              name: farmerzon-backend-config-rgwj
+        - name: BaseUrls__FarmerzonArticles__Port
+          valueFrom:
+            configMapKeyRef:
+              key: BaseUrls__FarmerzonArticles__Port
+              name: farmerzon-backend-config-rgwj
+        image: lukbraun/farmerzon-backend
+        imagePullPolicy: Always
+        name: farmerzon-backend-1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2020-06-13T20:59:20Z"
+    lastUpdateTime: "2020-06-13T20:59:24Z"
+    message: ReplicaSet "farmerzon-backend-659dbddcc" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2020-06-13T21:08:57Z"
+    lastUpdateTime: "2020-06-13T21:08:57Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 11
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

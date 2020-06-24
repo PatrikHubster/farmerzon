@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-06-04T17:57:01Z"
+  labels:
+    app: farmerzon-articles
+  name: farmerzon-articles-service
+  namespace: default
+  resourceVersion: "2880622"
+  selfLink: /api/v1/namespaces/default/services/farmerzon-articles-service
+  uid: cad33e2f-a68c-11ea-a07f-42010a8401d1
+spec:
+  clusterIP: 10.4.14.192
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30275
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: farmerzon-articles
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.78.83.15
