@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3cb3c8f7-baa7-4fc9-9a7c-b61f12f6e982",
+		"_postman_id": "408e2a82-5fc8-48ab-a9fe-94aa7dd7dd77",
 		"name": "Farmerzon",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -77,7 +77,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query {\n    units(unitId:1name:\"Liter\") {\n        unitId\n        name,\n        articles {\n            articleId,\n            name,\n            description,\n            createdAt,\n            updatedAt,\n            amount,\n            price,\n            size\n        }\n    }\n    articles(articleId:1,description:\"Schmeckt himmlisch lecker.\",amount:50,price:2.5,size:1.0,createdAt:\"2020-06-07T20:20:50.639897\",updatedAt:\"2020-06-07T20:20:50.639897\") {\n        articleId,\n        name,\n        description,\n        createdAt,\n        updatedAt,\n        amount,\n        price,\n        size,\n        unit {\n            unitId,\n            name\n        },\n        person {\n            personId,\n            userName,\n            normalizedUserName\n        }\n    },\n    people(personId:1,userName:\"lukas-braun\") {\n        personId\n        userName,\n        normalizedUserName,\n        articles {\n            articleId,\n            name,\n            description,\n            createdAt,\n            updatedAt,\n            amount,\n            price,\n            size\n        }\n    },\n    addresses {\n        addressId,\n        doorNumber,\n        street\n    }\n}",
+						"query": "query {\n    units(unitId:1,name:\"Liter\") {\n        unitId\n        name,\n        articles {\n            articleId,\n            name,\n            description,\n            createdAt,\n            updatedAt,\n            amount,\n            price,\n            size\n        }\n    }\n    articles(articleId:1,description:\"Schmeckt himmlisch lecker.\",amount:50,price:2.5,size:1.0,createdAt:\"2020-06-07T20:20:50.639897\",updatedAt:\"2020-06-07T20:20:50.639897\") {\n        articleId,\n        name,\n        description,\n        createdAt,\n        updatedAt,\n        amount,\n        price,\n        size,\n        unit {\n            unitId,\n            name\n        },\n        person {\n            personId,\n            userName,\n            normalizedUserName\n        }\n    },\n    people(personId:1,userName:\"lukas-braun\") {\n        personId\n        userName,\n        normalizedUserName,\n        articles {\n            articleId,\n            name,\n            description,\n            createdAt,\n            updatedAt,\n            amount,\n            price,\n            size\n        }\n    },\n    addresses {\n        addressId,\n        doorNumber,\n        street\n    }\n}",
 						"variables": ""
 					}
 				},
@@ -528,13 +528,475 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:51459/v1.0/invoke/farmerzon-address/method/address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:51459/v1.0/invoke/farmerzon-address/method/address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"zipCode\": \"4801\",\n    \"name\": \"Traunkirchen - Gmunden\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city?cityId=2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"zipCode\": \"4801\",\n        \"name\": \"Traunkirchen\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city?cityId=4",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"city"
+					],
+					"query": [
+						{
+							"key": "cityId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city?cityId=4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city?cityId=5",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"city"
+					],
+					"query": [
+						{
+							"key": "cityId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country?",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"DE\",\n    \"name\": \"Deutschlandsberg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country?countryId=2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"DE\",\n    \"name\": \"Deutschland\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country?countryId=2",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"country"
+					],
+					"query": [
+						{
+							"key": "countryId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country?countryId=3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/country?countryId=3",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"country"
+					],
+					"query": [
+						{
+							"key": "countryId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/city",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Wiener-Neustadt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state?stateId=3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Wien\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state?stateId=3",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"state"
+					],
+					"query": [
+						{
+							"key": "stateId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state?stateId=4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlDapr}}/v1.0/invoke/farmerzon-address/method/state?stateId=4",
+					"host": [
+						"{{baseUrlDapr}}"
+					],
+					"path": [
+						"v1.0",
+						"invoke",
+						"farmerzon-address",
+						"method",
+						"state"
+					],
+					"query": [
+						{
+							"key": "stateId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "5fb9d624-0cf5-484b-b3e8-287fa8907acd",
+				"id": "a2c74b50-30ec-4d47-b0a7-ec0889002153",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -544,7 +1006,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "27f92ca5-5af4-440b-a98c-4a441f49d0ce",
+				"id": "764d4906-04cb-4d9f-a5af-90978fc207e4",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -554,34 +1016,34 @@
 	],
 	"variable": [
 		{
-			"id": "9e3756a6-ae7f-4491-bb8b-7ee713ecaa35",
+			"id": "2188f251-8b16-488f-92bd-fe7690fa9372",
 			"key": "baseUrlAuthentication",
-			"value": "http://34.76.164.134:80",
-			"type": "string"
+			"value": "http://34.76.164.134:80"
 		},
 		{
-			"id": "a51e9097-93be-4e95-b7f1-f378b5694af1",
+			"id": "474b7c8c-5484-4881-9a2f-09947f3a9c72",
 			"key": "baseUrlBackend",
-			"value": "http://35.187.72.191:80",
-			"type": "string"
+			"value": "http://35.187.72.191:80"
 		},
 		{
-			"id": "7d8f1d79-a99c-422c-8f74-2866b4cfa1c4",
+			"id": "3c8f26db-a3a6-4d92-8d1b-87a1b4f898f0",
 			"key": "baseUrlArticles",
-			"value": "http://34.78.83.15:80",
-			"type": "string"
+			"value": "http://34.78.83.15:80"
 		},
 		{
-			"id": "466b8b20-1847-42d1-842f-e2a1e0dff880",
+			"id": "cb80494c-2824-42de-945f-8e802c3109c8",
 			"key": "baseUrlAddress",
-			"value": "http://34.78.154.139:80",
-			"type": "string"
+			"value": "http://34.78.154.139:80"
 		},
 		{
-			"id": "db39f87d-bb6a-4458-a2fb-a77a9f363cae",
+			"id": "66d15b67-ae0d-499b-bb18-f38b69b688bb",
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQQVRSSUstSFVCRVIiLCJqdGkiOiI2NTVlYjIzMi1hZjM3LTQzZjUtODE2OS0zMzRiZjk4YjY2NmIiLCJlbWFpbCI6InBhdHJpay1odWJlckBhb24uYXQiLCJpZCI6IjI3YTMyYjU1LWE4ZjQtNGY2Ny04MDg3LTEwNzJhMzFkZDZhZCIsInVzZXJuYW1lIjoicGF0cmlrLWh1YmVyIiwic3RyZWV0IjoiTXVzdGVyc3RyYcOfZSIsImRvb3JOdW1iZXIiOiIxOEIiLCJ6aXBDb2RlIjoiNDIzMiIsImNpdHlOYW1lIjoiSGFnZW5iZXJnIiwiY291bnRyeUNvZGUiOiJBVCIsImNvdW50cnlOYW1lIjoiw5ZzdGVycmVpY2giLCJzdGF0ZU5hbWUiOiJPYmVyw7ZzdGVycmVpY2giLCJuYmYiOjE1OTIwODI2MzIsImV4cCI6MTU5MjA4OTgzMiwiaWF0IjoxNTkyMDgyNjMyLCJpc3MiOiJ3d3cuZmFybWVyem9uLmF0IiwiYXVkIjoid3d3LmZhcm1lcnpvbi5hdCJ9.WGNew7xCGr-gocncp36TIHeAkUJ7v-OnGAIXmXVqRLY",
-			"type": "string"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQQVRSSUstSFVCRVIiLCJqdGkiOiIzMjA3NmMzZi02NmY4LTQwMGUtOGFmZi02OWY5MTA2NDE4YjkiLCJlbWFpbCI6InBhdHJpay1odWJlckBhb24uYXQiLCJpZCI6IjNmMWZiYmY4LTEwZjItNGU5MC04ZmE1LWFjNzYzYTc2MDJjYiIsInVzZXJuYW1lIjoicGF0cmlrLWh1YmVyIiwic3RyZWV0IjoiTXVzdGVyc3RyYcOfZSIsImRvb3JOdW1iZXIiOiIxOEIiLCJ6aXBDb2RlIjoiNDIzMiIsImNpdHlOYW1lIjoiSGFnZW5iZXJnIiwiY291bnRyeUNvZGUiOiJBVCIsImNvdW50cnlOYW1lIjoiw5ZzdGVycmVpY2giLCJzdGF0ZU5hbWUiOiJPYmVyw7ZzdGVycmVpY2giLCJuYmYiOjE2MDA4NDI0ODksImV4cCI6MTYwMDg0OTY4OSwiaWF0IjoxNjAwODQyNDg5LCJpc3MiOiJ3d3cuZmFybWVyem9uLmF0IiwiYXVkIjoid3d3LmZhcm1lcnpvbi5hdCJ9.gkhoqrGellkX2fCv1qXYsiMITccyoytyNoIWIDkZwbw"
+		},
+		{
+			"id": "ee192548-7673-4245-9a28-79fdab9bbe7d",
+			"key": "baseUrlDapr",
+			"value": "http://localhost:53943"
 		}
 	],
 	"protocolProfileBehavior": {}
