@@ -1,23 +1,6 @@
 version: "3"
 
-networks:
-  farmerzon-authentication-db:
-
 services:
-  farmerzon-authentication-db:
-    container_name: farmerzon-authentication-db
-    image: postgres
-    environment: 
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin123
-      - POSTGRES_DB=farmerzon_articles
-    volumes:
-      - ./farmerzon-authentication-db/:/var/lib/postgresql/data/
-    ports:
-      - 8000:5432
-    networks:
-      - farmerzon-authentication-db
-
   farmerzon-authentication:
     container_name: farmerzon-authentication
     build: ./farmerzon-authentication/.
