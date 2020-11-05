@@ -23,7 +23,7 @@ cd $dir
 
 for repo in $REPOS ; do
     if [ ! -d $repo ] ; then
-        git clone git@github.com:lukbraun/$repo.git
+        git clone git@github.com:patrikhubster/$repo.git
         cd $repo
         git config user.email $email
         cd ..
