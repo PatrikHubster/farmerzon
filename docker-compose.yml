@@ -6,32 +6,138 @@ services:
     build: ./farmerzon-authentication/.
     ports: 
       - 5000:5000
+    depends_on:
+      - farmerzon-authentication-db
+      - placement
+      - redis
+    networks:
+      - farmerzon-network
+    environment:
+      - ConnectionStrings__FarmerzonAuthentication=UserId=admin;Password=password;Server=farmerzon-authentication-db;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True
+
+  farmerzon-authentication-dapr:
+    image: "daprio/daprd:0.11.2"
+    command: ["./daprd",
+      "-app-id", "farmerzon-authentication",
+      "-app-port", "5000",
+      "-placement-host-address", "placement:50006",
+      "-components-path", "/components"]
+    volumes:
+      - "./components/:/components"
+    depends_on:
+      - farmerzon-authentication
+    network_mode: "service:farmerzon-authentication"
 
   farmerzon-articles:
     container_name: farmerzon-articles
     build: ./farmerzon-articles/.
     ports:
       - 5001:5000
+    depends_on:
+      - farmerzon-articles-db
+      - placement
+      - redis
+    networks:
+      - farmerzon-network
+    environment:
+      - ConnectionStrings__FarmerzonArticles=UserId=admin;Password=password;Server=farmerzon-articles-db;Port=5432;Database=farmerzon-articles-db;IntegratedSecurity=True;Pooling=True;Enlist=True
+
+  farmerzon-articles-dapr:
+    image: "daprio/daprd:0.11.2"
+    command: ["./daprd",
+      "-app-id", "farmerzon-articles",
+      "-app-port", "5000",
+      "-placement-host-address", "placement:50006",
+      "-components-path", "/components"]
+    volumes:
+      - "./components/:/components"
+    depends_on:
+      - farmerzon-articles
+    network_mode: "service:farmerzon-articles"
 
   farmerzon-address:
     container_name: farmerzon-address
     build: ./farmerzon-address/.
     ports:
       - 5002:5000
-
-  farmerzon-backend:
-    container_name: farmerzon-backend
-    build: ./farmerzon-backend/.
-    ports:
-      - 5003:5000
+    depends_on:
+      - farmerzon-address-db
+      - placement
+      - redis
+    networks:
+      - farmerzon-network
     environment:
-      - BaseUrls__FarmerzonAddress__Host=farmerzon-address
-      - BaseUrls__FarmerzonAddress__Port=5000
-      - BaseUrls__FarmerzonArticles__Host=farmerzon-articles
-      - BaseUrls__FarmerzonArticles__Port=5000
+      - ConnectionStrings__FarmerzonAddress=UserId=admin;Password=password;Server=farmerzon-address-db;Port=5432;Database=farmerzon-address-db;IntegratedSecurity=True;Pooling=True;Enlist=True
 
-  farmerzon-frontend:
-    container_name: farmerzon-frontend
-    build: ./farmerzon-frontend/.
+  farmerzon-address-dapr:
+    image: "daprio/daprd:0.11.2"
+    command: ["./daprd",
+      "-app-id", "farmerzon-address",
+      "-app-port", "5000",
+      "-placement-host-address", "placement:50006",
+      "-components-path", "/components"]
+    volumes:
+      - "./components/:/components"
+    depends_on:
+      - farmerzon-address
+    network_mode: "service:farmerzon-address"
+
+  farmerzon-authentication-db:
+    container_name: farmerzon-authentication-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-authentication-db
+    volumes:
+      - ./db-auth/:/var/lib/postgresql/data
     ports:
-      - 5004:3000
+      - 5432:5432
+    networks:
+      - farmerzon-network
+  
+  farmerzon-articles-db:
+    container_name: farmerzon-articles-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-articles-db
+    volumes:
+      - ./db-articles/:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    networks:
+      - farmerzon-network
+
+  farmerzon-address-db:
+    container_name: farmerzon-address-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-address-db
+    volumes:
+      - ./db-address/:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+    networks:
+      - farmerzon-network
+
+  placement:
+    image: "daprio/dapr:0.11.2"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
+      - farmerzon-network
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6380:6379"
+    networks:
+      - farmerzon-network
+
+networks:
+  farmerzon-network:

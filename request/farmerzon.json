@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"UserName\": \"patrik-huber\",\n\t\"Password\": \"1[Pa$$word]1\",\n\t\"Email\": \"patrik-huber@aon.at\",\n\t\"Address\": {\n\t\t\"Street\": \"Musterstraße\",\n\t\t\"ZipCode\": \"4232\",\n\t\t\"CityName\": \"Hagenberg\",\n\t\t\"StateName\": \"Oberösterreich\",\n\t\t\"DoorNumber\": \"18B\",\n\t\t\"CountryName\": \"Österreich\",\n\t\t\"CountryCode\": \"AT\"\n\t}\n}",
+					"raw": "{\n\t\"UserName\": \"lukas-braun\",\n\t\"Password\": \"1[Pa$$word]1\",\n\t\"Email\": \"lukas-braun@aon.at\",\n\t\"Address\": {\n\t\t\"Street\": \"Softwarepark\",\n\t\t\"ZipCode\": \"4232\",\n\t\t\"CityName\": \"Hagenberg\",\n\t\t\"StateName\": \"Oberösterreich\",\n\t\t\"DoorNumber\": \"1\",\n\t\t\"CountryName\": \"Österreich\",\n\t\t\"CountryCode\": \"AT\"\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -77,7 +77,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query {\n    units(unitId:1name:\"Liter\") {\n        unitId\n        name,\n        articles {\n            articleId,\n            name,\n            description,\n            createdAt,\n            updatedAt,\n            amount,\n            price,\n            size\n        }\n    }\n    articles(articleId:1,description:\"Schmeckt himmlisch lecker.\",amount:50,price:2.5,size:1.0,createdAt:\"2020-06-07T20:20:50.639897\",updatedAt:\"2020-06-07T20:20:50.639897\") {\n        articleId,\n        name,\n        description,\n        createdAt,\n        updatedAt,\n        amount,\n        price,\n        size,\n        unit {\n            unitId,\n            name\n        },\n        person {\n            personId,\n            userName,\n            normalizedUserName\n        }\n    },\n    people(personId:1,userName:\"lukas-braun\") {\n        personId\n        userName,\n        normalizedUserName,\n        articles {\n            articleId,\n            name,\n            description,\n            createdAt,\n            updatedAt,\n            amount,\n            price,\n            size\n        }\n    },\n    addresses {\n        addressId,\n        doorNumber,\n        street\n    }\n}",
+						"query": "mutation {\n    createArticle(article:{name:\"test\", description:\"test\",amount:50,unit:{name:\"Liter\"},size:1.5,price:10.5}) {\n        articleId,\n        name,\n        description\n    }\n}",
 						"variables": ""
 					}
 				},
@@ -241,7 +241,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrlArticles}}/person/get-by-article-id?articleIds=1&articleIds=2&articleIds=3&articleIds=4&articleIds=5",
+					"raw": "{{baseUrlArticles}}/person/get-by-article-id?articleIds=1&articleIds=2&articleIds=3&articleIds=4&articleIds=5&articleIds=6&articlesIds=7&articlesIds=8",
 					"host": [
 						"{{baseUrlArticles}}"
 					],
@@ -269,6 +269,18 @@
 						{
 							"key": "articleIds",
 							"value": "5"
+						},
+						{
+							"key": "articleIds",
+							"value": "6"
+						},
+						{
+							"key": "articlesIds",
+							"value": "7"
+						},
+						{
+							"key": "articlesIds",
+							"value": "8"
 						}
 					]
 				}
@@ -365,7 +377,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrlArticles}}/article/get-by-unit-id?unitIds=1&unitsId=2",
+					"raw": "{{baseUrlArticles}}/article/get-by-unit-id?unitIds=1&unitIds=2",
 					"host": [
 						"{{baseUrlArticles}}"
 					],
@@ -379,7 +391,7 @@
 							"value": "1"
 						},
 						{
-							"key": "unitsId",
+							"key": "unitIds",
 							"value": "2"
 						}
 					]
@@ -403,18 +415,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrlArticles}}/article/get-by-person-id?personIds=1",
+					"raw": "{{baseUrlArticles}}/article/get-by-normalized-user-name?normalizedUserNames=LUKAS-BRAUN",
 					"host": [
 						"{{baseUrlArticles}}"
 					],
 					"path": [
 						"article",
-						"get-by-person-id"
+						"get-by-normalized-user-name"
 					],
 					"query": [
 						{
-							"key": "personIds",
-							"value": "1"
+							"key": "normalizedUserNames",
+							"value": "LUKAS-BRAUN"
 						}
 					]
 				}
@@ -528,6 +540,81 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "{{baseUrlArticles}}/article",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlArticles}}/article",
+					"host": [
+						"{{baseUrlArticles}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrlBackend}}/graph",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n    articles {\n        articleId\n        description\n        name\n        amount\n        size\n        unit {\n            unitId\n            name\n        }\n        person {\n            personId\n            userName\n            normalizedUserName\n            address {\n                addressId\n                doorNumber\n                street\n                state {\n                    stateId\n                    name\n                }\n                country {\n                    countryId\n                    name\n                }\n                city {\n                    cityId\n                    name\n                }\n            }\n        }\n    }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrlBackend}}/graph",
+					"host": [
+						"{{baseUrlBackend}}"
+					],
+					"path": [
+						"graph"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -554,34 +641,29 @@
 	],
 	"variable": [
 		{
-			"id": "9e3756a6-ae7f-4491-bb8b-7ee713ecaa35",
+			"id": "4f1b912d-5820-4e9e-b040-76727e818a3c",
 			"key": "baseUrlAuthentication",
-			"value": "http://34.76.164.134:80",
-			"type": "string"
+			"value": "http://34.76.164.134:800"
 		},
 		{
-			"id": "a51e9097-93be-4e95-b7f1-f378b5694af1",
+			"id": "df77e0ad-c1c2-49b2-84a5-cb047f6e369d",
 			"key": "baseUrlBackend",
-			"value": "http://35.187.72.191:80",
-			"type": "string"
+			"value": "http://35.187.72.191:800"
 		},
 		{
-			"id": "7d8f1d79-a99c-422c-8f74-2866b4cfa1c4",
+			"id": "09688cb9-cbec-4224-a977-b7560c0a8e85",
 			"key": "baseUrlArticles",
-			"value": "http://34.78.83.15:80",
-			"type": "string"
+			"value": "http://34.78.83.15:800"
 		},
 		{
-			"id": "466b8b20-1847-42d1-842f-e2a1e0dff880",
+			"id": "7dc8b0bd-8055-42a9-b914-db64330c3167",
 			"key": "baseUrlAddress",
-			"value": "http://34.78.154.139:80",
-			"type": "string"
+			"value": "http://34.78.154.139:800"
 		},
 		{
-			"id": "db39f87d-bb6a-4458-a2fb-a77a9f363cae",
+			"id": "4cbbd0cb-3cd1-48b7-9ac2-e11e66a06da0",
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQQVRSSUstSFVCRVIiLCJqdGkiOiI2NTVlYjIzMi1hZjM3LTQzZjUtODE2OS0zMzRiZjk4YjY2NmIiLCJlbWFpbCI6InBhdHJpay1odWJlckBhb24uYXQiLCJpZCI6IjI3YTMyYjU1LWE4ZjQtNGY2Ny04MDg3LTEwNzJhMzFkZDZhZCIsInVzZXJuYW1lIjoicGF0cmlrLWh1YmVyIiwic3RyZWV0IjoiTXVzdGVyc3RyYcOfZSIsImRvb3JOdW1iZXIiOiIxOEIiLCJ6aXBDb2RlIjoiNDIzMiIsImNpdHlOYW1lIjoiSGFnZW5iZXJnIiwiY291bnRyeUNvZGUiOiJBVCIsImNvdW50cnlOYW1lIjoiw5ZzdGVycmVpY2giLCJzdGF0ZU5hbWUiOiJPYmVyw7ZzdGVycmVpY2giLCJuYmYiOjE1OTIwODI2MzIsImV4cCI6MTU5MjA4OTgzMiwiaWF0IjoxNTkyMDgyNjMyLCJpc3MiOiJ3d3cuZmFybWVyem9uLmF0IiwiYXVkIjoid3d3LmZhcm1lcnpvbi5hdCJ9.WGNew7xCGr-gocncp36TIHeAkUJ7v-OnGAIXmXVqRLY",
-			"type": "string"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQQVRSSUstSFVCRVIiLCJqdGkiOiI5ZTUxNTYzNy03MjQwLTRiNmItYjVkMy0zMDljZTE2NmIyMjciLCJlbWFpbCI6InBhdHJpay1odWJlckBhb24uYXQiLCJpZCI6IjI3YTMyYjU1LWE4ZjQtNGY2Ny04MDg3LTEwNzJhMzFkZDZhZCIsInVzZXJuYW1lIjoicGF0cmlrLWh1YmVyIiwic3RyZWV0IjoiTXVzdGVyc3RyYcOfZSIsImRvb3JOdW1iZXIiOiIxOEIiLCJ6aXBDb2RlIjoiNDIzMiIsImNpdHlOYW1lIjoiSGFnZW5iZXJnIiwiY291bnRyeUNvZGUiOiJBVCIsImNvdW50cnlOYW1lIjoiw5ZzdGVycmVpY2giLCJzdGF0ZU5hbWUiOiJPYmVyw7ZzdGVycmVpY2giLCJuYmYiOjE1OTMwMjE5MzYsImV4cCI6MTU5MzAyOTEzNiwiaWF0IjoxNTkzMDIxOTM2LCJpc3MiOiJ3d3cuZmFybWVyem9uLmF0IiwiYXVkIjoid3d3LmZhcm1lcnpvbi5hdCJ9.Ufp5pkOrzy31Bh-ZK9EqdhO78yOEFZ0nG0PirDWQQ0Q"
 		}
 	],
 	"protocolProfileBehavior": {}
