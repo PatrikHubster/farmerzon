@@ -1,16 +1,37 @@
 #!/bin/sh
 
-echo 'Insert Email: '
-echo -n "> "
-read email
+helpFunction()
+{
+   echo ""
+   echo "Usage: $0 -e <email-address> -m <clone-mode>"
+   echo "\t-e Email address which is used to clone from GitHub."
+   echo "\t-m Mode which is used to clone from GitHub. You can use https or ssh as input."
+   exit 1 # Exit script after printing help
+}
 
-input_type = ''
-while input_type != 'ssh' || input_type != 'http' do 
-    echo 'Git clone strategy: '
-    echo -n "> "
-    read input_type
+while getopts ":e:m:" opt
+do
+   case "$opt" in
+      e ) parameterEmail="$OPTARG" ;;
+      m ) parameterMode="$OPTARG" ;;
+      ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
+   esac
 done
 
+# Print helpFunction in case parameters are empty
+if [ -z "$parameterEmail" ] || [ -z "$parameterMode" ]
+then
+   echo "Some or all of the parameters are empty";
+   helpFunction
+fi
+
+if [ "$parameterMode" != "ssh" ] && [ "$parameterMode" != "https" ]
+then
+    echo "The mode has to be https or ssh. Therefor see the usage";
+    helpFunction
+fi
+
+# Begin script in case all parameters are correct
 REPOS="farmerzon"
 REPOS="${REPOS} farmerzon-address"
 REPOS="${REPOS} farmerzon-articles"
@@ -22,11 +43,15 @@ REPOS="${REPOS} farmerzon-alexa"
 REPOS="${REPOS} farmerzon-recipes"
 REPOS="${REPOS} farmerzon-farmer-joe"
 
-cd ..
+dir='./farmerzon'
+if [ ! -d  $dir ] ; then
+    mkdir $dir
+fi
+cd $dir
 
 for repo in $REPOS ; do
     if [ ! -d $repo ] ; then
-        if input_type == 'ssh' then
+        if [ "$parameterMode" == "ssh" ] ; then
             git clone git@github.com:patrikhubster/$repo.git
         else
             git clone https://github.com/patrikhubster/$repo.git
@@ -44,7 +69,6 @@ for repo in $REPOS ; do
     fi
 done
 
-cd farmerzon/
 if [ -d "farmerzon" ] ; then
     unlink ../clone
     unlink docker-compose.yml
