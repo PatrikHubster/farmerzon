@@ -4,6 +4,13 @@ echo 'Insert Email: '
 echo -n "> "
 read email
 
+input_type = ''
+while input_type != 'ssh' || input_type != 'http' do 
+    echo 'Git clone strategy: '
+    echo -n "> "
+    read input_type
+done
+
 REPOS="farmerzon"
 REPOS="${REPOS} farmerzon-address"
 REPOS="${REPOS} farmerzon-articles"
@@ -15,15 +22,15 @@ REPOS="${REPOS} farmerzon-alexa"
 REPOS="${REPOS} farmerzon-recipes"
 REPOS="${REPOS} farmerzon-farmer-joe"
 
-dir='./farmerzon'
-if [ ! -d  $dir ] ; then
-    mkdir $dir
-fi
-cd $dir
+cd ..
 
 for repo in $REPOS ; do
     if [ ! -d $repo ] ; then
-        git clone git@github.com:patrikhubster/$repo.git
+        if input_type == 'ssh' then
+            git clone git@github.com:patrikhubster/$repo.git
+        else
+            git clone https://github.com/patrikhubster/$repo.git
+        fi
         cd $repo
         git config user.email $email
         cd ..
@@ -37,6 +44,7 @@ for repo in $REPOS ; do
     fi
 done
 
+cd farmerzon/
 if [ -d "farmerzon" ] ; then
     unlink ../clone
     unlink docker-compose.yml
