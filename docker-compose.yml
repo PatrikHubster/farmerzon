@@ -22,8 +22,6 @@ services:
       "-app-port", "5000",
       "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
-    volumes:
-      - "./components/:/components"
     depends_on:
       - farmerzon-authentication
     network_mode: "service:farmerzon-authentication"
@@ -49,8 +47,6 @@ services:
       "-app-port", "5000",
       "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
-    volumes:
-      - "./components/:/components"
     depends_on:
       - farmerzon-articles
     network_mode: "service:farmerzon-articles"
@@ -76,8 +72,6 @@ services:
       "-app-port", "5000",
       "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
-    volumes:
-      - "./components/:/components"
     depends_on:
       - farmerzon-address
     network_mode: "service:farmerzon-address"
@@ -89,8 +83,6 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-authentication-db
-    volumes:
-      - ./db-auth/:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
@@ -103,8 +95,6 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-articles-db
-    volumes:
-      - ./db-articles/:/var/lib/postgresql/data
     ports:
       - 5433:5432
     networks:
@@ -117,10 +107,20 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-address-db
-    volumes:
-      - ./db-address/:/var/lib/postgresql/data
     ports:
       - 5434:5432
+    networks:
+      - farmerzon-network
+
+  farmerzon-recipies-db:
+    container_name: farmerzon-recipies-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-recipies-db
+    ports:
+      - 5435:5432
     networks:
       - farmerzon-network
 
