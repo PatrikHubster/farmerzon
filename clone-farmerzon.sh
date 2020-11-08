@@ -70,14 +70,14 @@ for repo in $REPOS ; do
 done
 
 if [ -d "farmerzon" ] ; then
-    if [ -f "docker-compose.yml"] ; then
+    if [ -f ./docker-compose.yml ] ; then
         unlink docker-compose.yml
     fi
 
-    if [ -f "../clone" ] ; then
+    if [ -f ../clone ] ; then
         unlink ../clone
     fi
 
     ln -n ./farmerzon/clone-farmerzon.sh ../clone
-    ln -n farmerzon/docker-compose.yml docker-compose.yml
+    ln -n farmerzon/docker-compose.yml ./docker-compose.yml
 fi
