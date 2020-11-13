@@ -1,5 +1,5 @@
 # farmerzon
-main-repo
+This repository is used to store all the configurations for farmerzon. Here all files for hosting, deployment, docker composing and so on are stored.
 
 # Docker-compose config
 Configuration:
