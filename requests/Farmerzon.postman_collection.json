@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "3cb3c8f7-baa7-4fc9-9a7c-b61f12f6e982",
+		"name": "Farmerzon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FarmerzonAuthentication",
+			"item": [
+				{
+					"name": "authentication/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"patrik-huber\",\n  \"email\": \"patrihub@icloud.com\",\n  \"password\": \"1[Pa$$word]1\",\n  \"address\": {\n    \"city\": {\n      \"zipCode\": \"4232\",\n      \"name\": \"Altmünster\"\n    },\n    \"country\": {\n      \"name\": \"Österreich\",\n      \"code\": \"AT\"\n    },\n    \"state\": {\n      \"name\": \"Oberösterreich\"\n    },\n    \"doorNumber\": \"105/1\",\n    \"street\": \"Softwarepark\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuthentication}}/authentication/register",
+							"host": [
+								"{{baseUrlAuthentication}}"
+							],
+							"path": [
+								"authentication",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authentication/login-user-name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserName\": \"patrik-huber\",\n\t\"Password\": \"1[Pa$$word]1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuthentication}}/authentication/login-user-name",
+							"host": [
+								"{{baseUrlAuthentication}}"
+							],
+							"path": [
+								"authentication",
+								"login-user-name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authentication/refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{token}}\",\n    \"refreshToken\": \"{{refreshToken}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuthentication}}/authentication/refresh",
+							"host": [
+								"{{baseUrlAuthentication}}"
+							],
+							"path": [
+								"authentication",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "person",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlAuthentication}}/person?userName=patrik-huber&normlaizedUserName=PATRIK-HUBER",
+							"host": [
+								"{{baseUrlAuthentication}}"
+							],
+							"path": [
+								"person"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "patrik-huber"
+								},
+								{
+									"key": "normlaizedUserName",
+									"value": "PATRIK-HUBER"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "FarmerzonAddress",
+			"item": [
+				{
+					"name": "address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlAddress}}/address",
+							"host": [
+								"{{baseUrlAddress}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "state",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlAddress}}/state",
+							"host": [
+								"{{baseUrlAddress}}"
+							],
+							"path": [
+								"state"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "country",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlAddress}}/country",
+							"host": [
+								"{{baseUrlAddress}}"
+							],
+							"path": [
+								"country"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "city",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlAddress}}/city",
+							"host": [
+								"{{baseUrlAddress}}"
+							],
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"city\": {\n    \"zipCode\": \"4232\",\n    \"name\": \"Hagenberg\"\n  },\n  \"country\": {\n    \"name\": \"Österreich\",\n    \"code\": \"AT\"\n  },\n  \"state\": {\n    \"name\": \"Oberösterreich\"\n  },\n  \"doorNumber\": \"18B\",\n  \"street\": \"Münsterstraße\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAddress}}/address",
+							"host": [
+								"{{baseUrlAddress}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "FarmerzonArticles",
+			"item": [
+				{
+					"name": "unit/get-by-article-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlArticles}}/unit/get-by-article-id?articleIds=1&articleIds=2&articleIds=3&articleIds=4&articleIds=5&articleIds=7",
+							"host": [
+								"{{baseUrlArticles}}"
+							],
+							"path": [
+								"unit",
+								"get-by-article-id"
+							],
+							"query": [
+								{
+									"key": "articleIds",
+									"value": "1"
+								},
+								{
+									"key": "articleIds",
+									"value": "2"
+								},
+								{
+									"key": "articleIds",
+									"value": "3"
+								},
+								{
+									"key": "articleIds",
+									"value": "4"
+								},
+								{
+									"key": "articleIds",
+									"value": "5"
+								},
+								{
+									"key": "articleIds",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlArticles}}/unit?unitId=1&name=Liter",
+							"host": [
+								"{{baseUrlArticles}}"
+							],
+							"path": [
+								"unit"
+							],
+							"query": [
+								{
+									"key": "unitId",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": "Liter"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "person/get-by-article-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlArticles}}/person/get-by-article-id?articleIds=1&articleIds=2&articleIds=3&articleIds=4&articleIds=5&articleIds=6&articlesIds=7&articlesIds=8",
+							"host": [
+								"{{baseUrlArticles}}"
+							],
+							"path": [
+								"person",
+								"get-by-article-id"
+							],
+							"query": [
+								{
+									"key": "articleIds",
+									"value": "1"
+								},
+								{
+									"key": "articleIds",
+									"value": "2"
+								},
+								{
+									"key": "articleIds",
+									"value": "3"
+								},
+								{
+									"key": "articleIds",
+									"value": "4"
+								},
+								{
+									"key": "articleIds",
+									"value": "5"
+								},
+								{
+									"key": "articleIds",
+									"value": "6"
+								},
+								{
+									"key": "articlesIds",
+									"value": "7"
+								},
+								{
+									"key": "articlesIds",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlArticles}}/article?articleId=1&name=Milch",
+							"host": [
+								"{{baseUrlArticles}}"
+							],
+							"path": [
+								"article"
+							],
+							"query": [
+								{
+									"key": "articleId",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": "Milch"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article/get-by-normalized-user-name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlArticles}}/article/get-by-normalized-user-name?normalizedUserNames=LUKAS-BRAUN",
+							"host": [
+								"{{baseUrlArticles}}"
+							],
+							"path": [
+								"article",
+								"get-by-normalized-user-name"
+							],
+							"query": [
+								{
+									"key": "normalizedUserNames",
+									"value": "LUKAS-BRAUN"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"unit\": {\n    \"name\": \"Liter\"\n  },\n  \"name\": \"Kirschsaft\",\n  \"description\": \"Schmeckt himmlisch lecker.\",\n  \"price\": 7.99,\n  \"amount\": 50,\n  \"size\": 10,\n  \"expirationDate\": \"2021-12-31T10:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlArticles}}/article",
+							"host": [
+								"{{baseUrlArticles}}"
+							],
+							"path": [
+								"article"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "FarmerzonBackend",
+			"item": [
+				{
+					"name": "graphql",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n    addresses {\n        id,\n        doorNumber,\n        street\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlBackend}}/graphql",
+							"host": [
+								"{{baseUrlBackend}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "graphql",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n    articles {\n        id\n        description\n        name\n        amount\n        size\n        createdAt\n        updatedAt\n        expirationDate\n        unit {\n            id\n            name\n        }\n        person {\n            userName\n            normalizedUserName\n            addresses {\n                id\n                doorNumber\n                street\n                state {\n                    id\n                    name\n                }\n                country {\n                    id\n                    name\n                }\n                city {\n                    id\n                    name\n                }\n            }\n        }\n    }\n}",
+								"variables": ""
+							},
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlBackend}}/graphql",
+							"host": [
+								"{{baseUrlBackend}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5fb9d624-0cf5-484b-b3e8-287fa8907acd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "27f92ca5-5af4-440b-a98c-4a441f49d0ce",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "0237f21e-ab63-4246-9483-d08318cf862c",
+			"key": "baseUrlAuthentication",
+			"value": "http://localhost:5000"
+		},
+		{
+			"id": "fb244156-5f44-4bc0-8656-3f13f224049d",
+			"key": "baseUrlBackend",
+			"value": "http://localhost:5003"
+		},
+		{
+			"id": "a1a23ce3-e1cc-450c-a9ac-4349b64d6e4e",
+			"key": "baseUrlArticles",
+			"value": "http://localhost:5001"
+		},
+		{
+			"id": "064e0dcb-6ea4-4a10-8463-8fea9ce6ca2e",
+			"key": "baseUrlAddress",
+			"value": "http://localhost:5002"
+		},
+		{
+			"id": "01587e2e-d7a2-434e-8f5a-af4a56f14128",
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQQVRSSUstSFVCRVIiLCJqdGkiOiI4ZTZjMDAyYi0yODY4LTQ4YmQtYmFhMC03ZDg2NzI3NWJjMmEiLCJlbWFpbCI6InBhdHJpaHViQGljbG91ZC5jb20iLCJpZCI6ImZlODg5NGI3LTY2NDMtNGRmYy1iNzkwLWM2ZTI1YzA2NjRkNSIsInVzZXJuYW1lIjoicGF0cmlrLWh1YmVyIiwibmJmIjoxNjA2MTU3ODIxLCJleHAiOjE2MDYxNTk2MjEsImlhdCI6MTYwNjE1NzgyMSwiaXNzIjoid3d3LmZhcm1lcnpvbi5hdCIsImF1ZCI6Ind3dy5mYXJtZXJ6b24uYXQifQ.VsTr236-VeASxzin2GM06J7iMu-Yj5f2d7m2z6SO88c"
+		},
+		{
+			"id": "dfb9ecee-ff86-42ad-83cd-bf514785b955",
+			"key": "refreshToken",
+			"value": "0d94ce23-8340-4cd4-974d-ff7b242bf6a4"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

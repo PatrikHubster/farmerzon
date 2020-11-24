@@ -79,5 +79,8 @@ if [ -d "farmerzon" ] ; then
     fi
 
     ln -n ./farmerzon/clone-farmerzon.sh ../clone
-    ln -n farmerzon/docker-compose.yml ./docker-compose.yml
+    ln -n ./farmerzon/deployment-unix.yml ./deployment-unix.yml
+    ln -n ./farmerzon/deployment-windows.yml ./deployment-windows.yml
+    ln -n ./farmerzon/virtual-databases-unix.yml ./virtual-databases-unix.yml
+    ln -n ./farmerzon/virtual-databases-windows.yml ./virtual-databases-windows.yml
 fi

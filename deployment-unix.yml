@@ -76,6 +76,29 @@ services:
       - farmerzon-address
     network_mode: "service:farmerzon-address"
 
+  farmerzon-backend:
+    container_name: farmerzon-backend
+    build: ./farmerzon-backend/.
+    ports:
+      - 5003:5000
+    depends_on:
+      - farmerzon-address
+      - farmerzon-articles
+      - farmerzon-authentication
+    networks:
+      - farmerzon-network
+
+  farmerzon-backend-dapr:
+    image: "daprio/daprd:0.11.2"
+    command: ["./daprd",
+      "-app-id", "farmerzon-backend",
+      "-app-port", "5000",
+      "-placement-host-address", "placement:50006",
+      "-components-path", "/components"]
+    depends_on:
+      - farmerzon-backend
+    network_mode: "service:farmerzon-backend"
+
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db
     image: postgres
@@ -83,6 +106,8 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-authentication-db
+    volumes:
+       - ./db-authentication/:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
@@ -95,6 +120,8 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-articles-db
+    volumes:
+       - ./db-articles/:/var/lib/postgresql/data
     ports:
       - 5433:5432
     networks:
@@ -107,6 +134,8 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-address-db
+    volumes:
+       - ./db-address/:/var/lib/postgresql/data
     ports:
       - 5434:5432
     networks:
@@ -119,6 +148,8 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=farmerzon-recipies-db
+    volumes:
+       - ./db-recipies/:/var/lib/postgresql/data
     ports:
       - 5435:5432
     networks:

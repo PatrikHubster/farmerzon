@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  farmerzon-authentication-db:
+    container_name: farmerzon-authentication-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-authentication-db
+    volumes:
+       - ./db-authentication/:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  
+  farmerzon-articles-db:
+    container_name: farmerzon-articles-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-articles-db
+    volumes:
+       - ./db-articles/:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+
+  farmerzon-address-db:
+    container_name: farmerzon-address-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-address-db
+    volumes:
+       - ./db-address/:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+
+  farmerzon-recipies-db:
+    container_name: farmerzon-recipies-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=farmerzon-recipies-db
+    volumes:
+       - ./db-recipies/:/var/lib/postgresql/data
+    ports:
+      - 5435:5432
