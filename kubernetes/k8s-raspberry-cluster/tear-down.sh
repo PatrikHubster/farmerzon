@@ -1,3 +1,6 @@
+# services
+microk8s kubectl delete svc farmerzon-authentication-np
+
 # stateful sets
 microk8s kubectl delete sts farmerzon-authentication-sts
 
