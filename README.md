@@ -40,7 +40,7 @@ user@computer:~$ docker-compose -f deployment-unix build && docker-compose -f de
 user@computer:~$ docker-compose -f deployment-unix down
 ```
 
-Under Windows make sure to use the 
+Under Windows make sure to use the WSL extension in Docker. Use the described commands in a WSL window.
 
 # docker-compose whole deployment
 
