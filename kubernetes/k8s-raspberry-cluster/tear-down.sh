@@ -1,13 +1,11 @@
-microk8s helm3 install postgres bitnami/postgresql 
-    --set image.repository=arm64v8/postgres 
-    --set image.tag=11.6
-    --set persistence.storageClass=microk8s-hostpapth
-    --set persistence.size=10Gi 
-    --set postgresqlDataDir=/data/pgdata 
-    --set persistence.mountPath=/data
-    --set volumePermissions.image.repository=arm32v7/alpine 
-    --set volumePermissions.image.tag=3.10 
-    --set securityContext.fsGroup=999 
-    --set securityContext.runAsUser=999 
-    --set livenessProbe.initialDelaySeconds=300 
-    --set readinessProbe.initialDelaySeconds=300 
+# stateful sets
+microk8s kubectl delete sts farmerzon-authentication-sts
+
+# config maps
+microk8s kubectl delete cm farmerzon-authentication-cm
+
+# persistent volume claims
+microk8s kubectl delete pvc farmerzon-authentication-pvc
+
+# persistent volumes
+microk8s kubectl delete pv postgres-pv

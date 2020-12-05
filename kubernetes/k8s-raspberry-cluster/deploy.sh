@@ -8,4 +8,4 @@ microk8s kubectl apply -f farmerzon-authentication-pvc.yml
 microk8s kubectl apply -f farmerzon-authentication-cm.yml
 
 # stateful sets
-microk8s kubectl apply -f farmerzon-authentication-ss.yml
+microk8s kubectl apply -f farmerzon-authentication-sts.yml
