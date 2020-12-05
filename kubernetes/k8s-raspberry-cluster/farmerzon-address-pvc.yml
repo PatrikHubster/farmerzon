@@ -1,15 +1,14 @@
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pv
+  name: farmerzon-address-pvc
   labels:
     app: postgres
-    type: local
 spec:
   storageClassName: microk8s-hostpath
   capacity:
-    storage: 9Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/var/data"
+  resources:
+    requests:
+      storage: 3Gi
