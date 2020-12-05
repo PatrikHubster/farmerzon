@@ -8,8 +8,6 @@ services:
       - 5000:5000
     depends_on:
       - farmerzon-authentication-db
-      - placement
-      - redis
     networks:
       - farmerzon-network
     environment:
@@ -20,7 +18,6 @@ services:
     command: ["./daprd",
       "-app-id", "farmerzon-authentication",
       "-app-port", "5000",
-      "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
     depends_on:
       - farmerzon-authentication
@@ -33,8 +30,6 @@ services:
       - 5001:5000
     depends_on:
       - farmerzon-articles-db
-      - placement
-      - redis
     networks:
       - farmerzon-network
     environment:
@@ -45,7 +40,6 @@ services:
     command: ["./daprd",
       "-app-id", "farmerzon-articles",
       "-app-port", "5000",
-      "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
     depends_on:
       - farmerzon-articles
@@ -58,8 +52,6 @@ services:
       - 5002:5000
     depends_on:
       - farmerzon-address-db
-      - placement
-      - redis
     networks:
       - farmerzon-network
     environment:
@@ -70,7 +62,6 @@ services:
     command: ["./daprd",
       "-app-id", "farmerzon-address",
       "-app-port", "5000",
-      "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
     depends_on:
       - farmerzon-address
@@ -93,7 +84,6 @@ services:
     command: ["./daprd",
       "-app-id", "farmerzon-backend",
       "-app-port", "5000",
-      "-placement-host-address", "placement:50006",
       "-components-path", "/components"]
     depends_on:
       - farmerzon-backend
@@ -144,21 +134,6 @@ services:
       - POSTGRES_DB=farmerzon-recipies-db
     ports:
       - 5435:5432
-    networks:
-      - farmerzon-network
-
-  placement:
-    image: "daprio/dapr:0.11.2"
-    command: ["./placement", "-port", "50006"]
-    ports:
-      - "50006:50006"
-    networks:
-      - farmerzon-network
-
-  redis:
-    image: "redis:alpine"
-    ports:
-      - "6380:6379"
     networks:
       - farmerzon-network
 

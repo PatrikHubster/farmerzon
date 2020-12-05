@@ -40,6 +40,8 @@ user@computer:~$ docker-compose -f deployment-unix build && docker-compose -f de
 user@computer:~$ docker-compose -f deployment-unix down
 ```
 
+Under Windows make sure to use the 
+
 # docker-compose whole deployment
 
 Configuration:
