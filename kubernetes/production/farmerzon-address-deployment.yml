@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-address-deployment
+  labels:
+    app: farmerzon-address
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: farmerzon-address
+  template:
+    metadata:
+      labels:
+        app: farmerzon-address
+    spec:
+      containers:
+      - name: farmerzon-address
+        image: patrikhuber/farmerzon-address:manifest-arm64v8
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonAddress
+          value: "UserId=admin;Password=password;Server=10.0.0.34;Port=5432;Database=farmerzon_address_db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000

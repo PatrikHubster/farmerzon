@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-articles-deployment
+  labels:
+    app: farmerzon-articles
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: farmerzon-articles
+  template:
+    metadata:
+      labels:
+        app: farmerzon-articles
+    spec:
+      containers:
+      - name: farmerzon-articles
+        image: patrikhuber/farmerzon-articles:manifest-arm64v8
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonArticles
+          value: "UserId=admin;Password=password;Server=10.0.0.34;Port=5432;Database=farmerzon_articles_db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000
