@@ -20,7 +20,7 @@ spec:
         image: postgres:12
         envFrom:
         - configMapRef:
-            name: farmerzon-authentication-configuration
+            name: farmerzon-authentication-cm
         ports:
         - containerPort: 5432
           name: postgresdb
