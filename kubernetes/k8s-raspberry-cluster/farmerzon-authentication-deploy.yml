@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-authentication-deploy
+  labels:
+    app: microservice-authentication
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-authentication
+  template:
+    metadata:
+      labels:
+        app: microservice-authentication
+    spec:
+      containers:
+      - name: farmerzon-authentication
+        image: patrikhuber/farmerzon-authentication:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonAuthentication
+          value: "UserId=admin;Password=password;Server=postgres-authentication;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000

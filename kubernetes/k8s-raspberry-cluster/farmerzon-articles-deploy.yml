@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-articles-deploy
+  labels:
+    app: microservice-articles
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-articles
+  template:
+    metadata:
+      labels:
+        app: microservice-articles
+    spec:
+      containers:
+      - name: farmerzon-articles
+        image: patrikhuber/farmerzon-articles:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonArticles
+          value: "UserId=admin;Password=password;Server=postgres-articles;Port=5432;Database=farmerzon-articles-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-address-deploy
+  labels:
+    app: microservice-address
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-address
+  template:
+    metadata:
+      labels:
+        app: microservice-address
+    spec:
+      containers:
+      - name: farmerzon-address
+        image: patrikhuber/farmerzon-address:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonAddress
+          value: "UserId=admin;Password=password;Server=postgres-address;Port=5432;Database=farmerzon-address-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000

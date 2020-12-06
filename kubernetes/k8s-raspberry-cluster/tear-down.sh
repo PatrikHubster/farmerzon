@@ -1,3 +1,6 @@
+# deployments
+microk8s kubect delete deploy ...
+
 # services
 microk8s kubectl delete svc farmerzon-address-cip
 microk8s kubectl delete svc farmerzon-articles-cip
