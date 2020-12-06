@@ -16,7 +16,7 @@ microk8s kubectl apply -f farmerzon-address-sts.yml
 microk8s kubectl apply -f farmerzon-articles-sts.yml
 microk8s kubectl apply -f farmerzon-authentication-sts.yml
 
-# services
+# postgres services
 microk8s kubectl apply -f farmerzon-address-cip.yml
 microk8s kubectl apply -f farmerzon-articles-cip.yml
 microk8s kubectl apply -f farmerzon-authentication-cip.yml
@@ -25,3 +25,8 @@ microk8s kubectl apply -f farmerzon-authentication-cip.yml
 microk8s kubectl apply -f farmerzon-address-deploy.yml
 microk8s kubectl apply -f farmerzon-articles-deploy.yml
 microk8s kubectl apply -f farmerzon-authentication-deploy.yml
+
+# microservice services
+microk8s kubectl apply -f farmerzon-address-np.yml
+microk8s kubectl apply -f farmerzon-articles-np.yml
+microk8s kubectl apply -f farmerzon-authentication-np.yml

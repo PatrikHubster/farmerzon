@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: farmerzon-address-np
+  labels:
+    app: microservice-address
+  ports:
+  - port: 5432
+    name: microservice-address
+  type: NodePort 
+  selector:
+    app: microservice-address
