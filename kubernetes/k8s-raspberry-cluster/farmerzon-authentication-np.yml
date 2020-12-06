@@ -4,6 +4,8 @@ metadata:
   name: farmerzon-authentication-np
   labels:
     app: microservice-authentication
+spec:
+  ports:
   - port: 5000
     name: microservice-authentication
   type: NodePort 

@@ -4,6 +4,7 @@ metadata:
   name: farmerzon-articles-np
   labels:
     app: microservice-articles
+spec:
   ports:
   - port: 5000
     name: microservice-articles
