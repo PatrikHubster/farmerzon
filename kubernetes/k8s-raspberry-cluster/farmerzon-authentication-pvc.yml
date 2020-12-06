@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: farmerzon-authentication-pvc
   labels:
-    app: postgres
+    app: postgres-authentication
 spec:
   storageClassName: microk8s-hostpath
   capacity:

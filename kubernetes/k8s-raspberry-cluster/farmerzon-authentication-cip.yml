@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: farmerzon-authentication-cip
   labels:
-    app: postgres
+    app: postgres-authentication
 spec:
   ports:
   - port: 5432
-    name: postgres
-  type: ClusterIP 
+    targetPort: 5002
+  type: NodePort 
   selector:
-    app: farmerzon-authentication-sts
+    app: postgres-authentication

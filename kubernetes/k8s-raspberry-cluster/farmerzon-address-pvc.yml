@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: farmerzon-address-pvc
   labels:
-    app: postgres
+    app: postgres-address
 spec:
   storageClassName: microk8s-hostpath
   capacity:

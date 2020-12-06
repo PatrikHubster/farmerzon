@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: farmerzon-address-cip
   labels:
-    app: postgres
+    app: postgres-address
 spec:
   ports:
   - port: 5432
-    name: postgres
-  type: ClusterIP 
+    targetPort: 5000
+  type: NodePort 
   selector:
-    app: postgres
+    app: postgres-address

@@ -3,17 +3,17 @@ kind: StatefulSet
 metadata:
   name: farmerzon-authentication-sts
   labels:
-    app: farmerzon-authentication-sts
+    app: postgres-authentication
 spec:
   serviceName: "postgres"
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: postgres-authentication
   template:
     metadata:
       labels:
-        app: postgres
+        app: postgres-authentication
     spec:
       containers:
       - name: postgres

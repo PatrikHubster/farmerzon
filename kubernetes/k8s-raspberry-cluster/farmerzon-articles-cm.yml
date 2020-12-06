@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: farmerzon-articles-cm
   labels:
-    app: postgres
+    app: postgres-articles
 data:
   POSTGRES_DB: farmerzon-articles-db
   POSTGRES_USER: admin

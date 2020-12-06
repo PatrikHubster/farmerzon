@@ -3,17 +3,17 @@ kind: StatefulSet
 metadata:
   name: farmerzon-address-sts
   labels:
-    app: farmerzon-address-sts
+    app: farmerzon-address
 spec:
   serviceName: "postgres"
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: postgres-address
   template:
     metadata:
       labels:
-        app: postgres
+        app: postgres-address
     spec:
       containers:
       - name: postgres
