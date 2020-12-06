@@ -20,3 +20,8 @@ microk8s kubectl apply -f farmerzon-authentication-sts.yml
 microk8s kubectl apply -f farmerzon-address-cip.yml
 microk8s kubectl apply -f farmerzon-articles-cip.yml
 microk8s kubectl apply -f farmerzon-authentication-cip.yml
+
+# deployments
+microk8s kubectl apply -f farmerzon-address-deploy.yml
+microk8s kubectl apply -f farmerzon-articles-deploy.yml
+microk8s kubectl apply -f farmerzon-authentication-deploy.yml
