@@ -25,6 +25,6 @@ spec:
         imagePullPolicy: "Always"
         env:
         - name: ConnectionStrings__FarmerzonAuthentication
-          value: "UserId=admin;Password=password;Server=postgres-authentication;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+          value: "UserId=admin;Password=password;Server=farmerzon-authentication-cip;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
         ports:
         - containerPort: 5000

@@ -25,6 +25,6 @@ spec:
         imagePullPolicy: "Always"
         env:
         - name: ConnectionStrings__FarmerzonAddress
-          value: "UserId=admin;Password=password;Server=postgres-address;Port=5432;Database=farmerzon-address-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+          value: "UserId=admin;Password=password;Server=farmerzon-address-cip;Port=5432;Database=farmerzon-address-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
         ports:
         - containerPort: 5000
