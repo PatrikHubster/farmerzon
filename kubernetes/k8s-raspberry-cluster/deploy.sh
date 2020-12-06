@@ -17,4 +17,4 @@ microk8s kubectl apply -f farmerzon-articles-sts.yml
 microk8s kubectl apply -f farmerzon-authentication-sts.yml
 
 # services
-microk8s kubectl apply -f farmerzon-authentication-np.yml
+microk8s kubectl apply -f farmerzon-authentication-cip.yml

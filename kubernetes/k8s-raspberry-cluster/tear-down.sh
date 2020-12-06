@@ -1,5 +1,5 @@
 # services
-microk8s kubectl delete svc farmerzon-authentication-np
+microk8s kubectl delete svc farmerzon-authentication-cip
 
 # stateful sets
 microk8s kubectl delete sts farmerzon-address-sts
