@@ -5,7 +5,7 @@ metadata:
   labels:
     app: microservice-address
   ports:
-  - port: 5432
+  - port: 5000
     name: microservice-address
   type: NodePort 
   selector:

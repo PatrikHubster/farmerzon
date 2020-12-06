@@ -6,7 +6,7 @@ microk8s kubectl delete svc farmerzon-authentication-np
 # deployments
 microk8s kubectl delete deploy farmerzon-address-deploy
 microk8s kubectl delete deploy farmerzon-articles-deploy
-mircok8s kubectl delete deploy farmerzon-authentication-deploy 
+microk8s kubectl delete deploy farmerzon-authentication-deploy
 
 # postgres services
 microk8s kubectl delete svc farmerzon-address-cip
