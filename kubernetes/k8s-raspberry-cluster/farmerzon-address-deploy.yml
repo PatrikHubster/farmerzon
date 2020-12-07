@@ -28,3 +28,10 @@ spec:
           value: "UserId=admin;Password=password;Server=farmerzon-address-cip;Port=5432;Database=farmerzon-address-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
         ports:
         - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 10
+          failureThreshold: 3
+          periodSeconds: 10
