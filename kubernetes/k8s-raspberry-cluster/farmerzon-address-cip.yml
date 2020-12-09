@@ -8,6 +8,6 @@ spec:
   ports:
   - port: 5432
     name: postgres-address
-  type: ClusterIP 
+  type: NodePort 
   selector:
     app: postgres-address
