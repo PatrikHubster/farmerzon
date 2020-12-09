@@ -28,3 +28,7 @@ spec:
           value: "UserId=admin;Password=password;Server=farmerzon-authentication-cip;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
         ports:
         - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
