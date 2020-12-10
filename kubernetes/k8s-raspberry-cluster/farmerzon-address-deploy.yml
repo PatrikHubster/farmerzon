@@ -18,6 +18,10 @@ spec:
     metadata:
       labels:
         app: microservice-address
+      annotations:
+        dapr.io/enabled: true
+        dapr.io/app-id: farmerzon-address
+        dapr.io/app-port: 5000
     spec:
       containers:
       - name: farmerzon-address
