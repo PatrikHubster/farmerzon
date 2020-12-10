@@ -19,9 +19,9 @@ spec:
       labels:
         app: microservice-articles
       annotations:
-        dapr.io/enabled: true
-        dapr.io/app-id: farmerzon-articles
-        dapr.io/app-port: 5000
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "farmerzon-articles"
+        dapr.io/app-port: "5000"
     spec:
       containers:
       - name: farmerzon-articles
