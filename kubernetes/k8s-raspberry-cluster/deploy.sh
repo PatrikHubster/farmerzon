@@ -32,3 +32,6 @@ microk8s kubectl apply -f farmerzon-backend-deploy.yml
 # microk8s kubectl apply -f farmerzon-articles-np.yml
 # microk8s kubectl apply -f farmerzon-authentication-np.yml
 # microk8s kubectl apply -f farmerzon-backend-np.yml
+
+# ingress
+microk8s kubectl apply -f farmerzon-ingress.yml
