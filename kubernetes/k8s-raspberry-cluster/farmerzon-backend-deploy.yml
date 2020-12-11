@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-backend-deploy
+  labels:
+    app: microservice-backend
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-backend
+  template:
+    metadata:
+      labels:
+        app: microservice-backend
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "farmerzon-backend"
+        dapr.io/app-port: "5000"
+        dapr.io/config: "tracing"
+    spec:
+      containers:
+      - name: farmerzon-backend
+        image: patrikhuber/farmerzon-backend:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 10
+        readinessProbe:
+          periodSeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 2
+          failureThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 5000
