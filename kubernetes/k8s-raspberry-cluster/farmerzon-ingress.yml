@@ -11,14 +11,14 @@ spec:
           serviceName: farmerzon-backend
           servicePort: 80
       - path: /address
-        address:
+        backend:
           serviceName: farmerzon-address-dapr
           servicePort: 80
       - path: /articles
-        articles:
+        backend:
           serviceName: farmerzon-articles-dapr
           servicePort: 80
       - path: /authentication
-        authentication:
+        backend:
           serviceName: farmerzon-authentication
           servicePort: 80
