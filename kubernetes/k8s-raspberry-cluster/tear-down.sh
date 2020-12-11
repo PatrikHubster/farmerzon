@@ -1,9 +1,11 @@
 # microservice services
+microk8s kubectl delete svc farmerzon-backend-np
 microk8s kubectl delete svc farmerzon-address-np
 microk8s kubectl delete svc farmerzon-articles-np
 microk8s kubectl delete svc farmerzon-authentication-np
 
 # deployments
+microk8s kubectl delete deploy farmerzon-backend-deploy
 microk8s kubectl delete deploy farmerzon-address-deploy
 microk8s kubectl delete deploy farmerzon-articles-deploy
 microk8s kubectl delete deploy farmerzon-authentication-deploy
