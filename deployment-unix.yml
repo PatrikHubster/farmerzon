@@ -89,6 +89,18 @@ services:
       - farmerzon-backend
     network_mode: "service:farmerzon-backend"
 
+  farmerzon-frontend:
+    container_name: farmerzon-frontend
+    build: ./farmerzon-frontend/.
+    ports:
+      - 3000:3000
+    depends_on:
+      - farmerzon-address
+      - farmerzon-articles
+      - farmerzon-authentication
+    networks:
+      - farmerzon-network
+
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db
     image: postgres
