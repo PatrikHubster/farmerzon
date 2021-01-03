@@ -100,6 +100,9 @@ services:
       - farmerzon-authentication
     networks:
       - farmerzon-network
+    environment:
+      - REACT_APP_GRAPH_SERVER=http://mysecretservice.at
+      - REACT_APP_AUTH_SERVER=http://mysecretservice.at
 
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db
