@@ -93,7 +93,7 @@ services:
     container_name: farmerzon-frontend
     build: ./farmerzon-frontend/.
     ports:
-      - 3000:3000
+      - 3000:80
     depends_on:
       - farmerzon-address
       - farmerzon-articles
@@ -101,8 +101,8 @@ services:
     networks:
       - farmerzon-network
     environment:
-      - REACT_APP_GRAPH_SERVER=http://mysecretservice.at
-      - REACT_APP_AUTH_SERVER=http://mysecretservice.at
+      - GRAPH_SERVER=http://localhost:5003
+      - AUTH_SERVER=http://localhost:5000
 
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db

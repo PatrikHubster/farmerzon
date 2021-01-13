@@ -8,6 +8,6 @@ spec:
   ports:
   - port: 5000
     name: microservice-address
-  type: NodePort 
+  type: ClusterIP 
   selector:
     app: microservice-address

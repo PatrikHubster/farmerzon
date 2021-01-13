@@ -8,6 +8,6 @@ spec:
   ports:
   - port: 5000
     name: microservice-authentication
-  type: NodePort 
+  type: ClusterIP 
   selector:
     app: microservice-authentication
