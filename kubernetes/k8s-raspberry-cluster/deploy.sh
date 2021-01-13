@@ -28,10 +28,10 @@ microk8s kubectl apply -f farmerzon-authentication-deploy.yml
 microk8s kubectl apply -f farmerzon-backend-deploy.yml
 
 # microservice services
-# microk8s kubectl apply -f farmerzon-address-np.yml
-# microk8s kubectl apply -f farmerzon-articles-np.yml
-# microk8s kubectl apply -f farmerzon-authentication-np.yml
-# microk8s kubectl apply -f farmerzon-backend-np.yml
+microk8s kubectl apply -f farmerzon-address-np.yml
+microk8s kubectl apply -f farmerzon-articles-np.yml
+microk8s kubectl apply -f farmerzon-authentication-np.yml
+microk8s kubectl apply -f farmerzon-backend-np.yml
 
 # ingress
-microk8s kubectl apply -f farmerzon-ingress.yml
+# microk8s kubectl apply -f farmerzon-ingress.yml

@@ -1,3 +1,4 @@
+# ingress
 microk8s kubectl delete ingress farmerzon-ingress
 
 # microservice services
