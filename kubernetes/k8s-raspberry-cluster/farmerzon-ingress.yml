@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: http-ingress
+  name: farmerzon-ingress
 spec:
   rules:
   - http:
@@ -9,4 +9,4 @@ spec:
       - path: /address
         backend:
           serviceName: farmerzon-address-np
-          servicePort: 5000
+          servicePort: 30388
