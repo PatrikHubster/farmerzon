@@ -1,25 +1,12 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: farmerzon-ingress
-  namespace: default
+  name: http-ingress
 spec:
   rules:
   - http:
       paths:
-      - path: /backend
-        backend:
-          serviceName: farmerzon-backend
-          servicePort: 80
       - path: /address
         backend:
-          serviceName: farmerzon-address-dapr
-          servicePort: 80
-      - path: /articles
-        backend:
-          serviceName: farmerzon-articles-dapr
-          servicePort: 80
-      - path: /authentication
-        backend:
-          serviceName: farmerzon-authentication
-          servicePort: 80
+          serviceName: farmerzon-address-np
+          servicePort: 5000
