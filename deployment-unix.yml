@@ -12,7 +12,7 @@ services:
       - farmerzon-network
     environment:
       - ConnectionStrings__FarmerzonAuthentication=UserId=admin;Password=password;Server=farmerzon-authentication-db;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True
-      - AllowedOrigins__0=http://localhost:3000
+      - AllowedOrigins__0=*
 
   farmerzon-authentication-dapr:
     image: "daprio/daprd:0.11.2"
@@ -80,7 +80,7 @@ services:
     networks:
       - farmerzon-network
     environment:
-      - AllowedOrigins__0=http://localhost:3000
+      - AllowedOrigins__0=*
 
   farmerzon-backend-dapr:
     image: "daprio/daprd:0.11.2"
@@ -104,8 +104,8 @@ services:
     networks:
       - farmerzon-network
     environment:
-      - GRAPH_SERVER=http://localhost:5003
-      - AUTH_SERVER=http://localhost:5000
+      - GRAPH_SERVER=http://10.0.0.5:5003
+      - AUTH_SERVER=http://10.0.0.5:5000
 
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db
