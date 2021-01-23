@@ -4,8 +4,7 @@ metadata:
   name: farmerzon-ingress
 spec:
   rules:
-  - host: api.farmerzon.local
-    http:
+  - http:
       paths:
       - path: /authentication
         backend:
