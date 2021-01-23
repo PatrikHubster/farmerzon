@@ -6,7 +6,7 @@ metadata:
     app: microservice-frontend
 spec:
   ports:
-  - port: 5000
+  - port: 80
     name: microservice-frontend
   type: NodePort 
   selector:
