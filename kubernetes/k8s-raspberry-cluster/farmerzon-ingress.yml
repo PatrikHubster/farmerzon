@@ -4,9 +4,14 @@ metadata:
   name: farmerzon-ingress
 spec:
   rules:
-  - http:
+  - host: api.farmerzon.local
+    http:
       paths:
-      - path: /address
+      - path: /authentication
         backend:
-          serviceName: farmerzon-address-np
-          servicePort: 30388
+          serviceName: farmerzon-authentication-ingress-cip
+          servicePort: 5000
+      - path: /backend
+        backend:
+          serviceName: farmerzon-backend-ingress-cip
+          servicePort: 5000
