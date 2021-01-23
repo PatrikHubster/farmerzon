@@ -25,3 +25,10 @@ spec:
         backend:
           serviceName: farmerzon-frontend-ingress-cip
           servicePort: 80
+  - host: health.farmerzon.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 443
