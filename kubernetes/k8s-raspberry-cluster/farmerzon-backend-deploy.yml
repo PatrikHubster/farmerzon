@@ -28,6 +28,9 @@ spec:
       - name: farmerzon-backend
         image: patrikhuber/farmerzon-backend:latest
         imagePullPolicy: "Always"
+        env:
+        - name: AllowedOrigins__0
+          value: "farmerzon.local"
         ports:
         - containerPort: 5000
         livenessProbe:

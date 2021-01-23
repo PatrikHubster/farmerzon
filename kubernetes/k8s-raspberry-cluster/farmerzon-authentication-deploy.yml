@@ -31,6 +31,8 @@ spec:
         env:
         - name: ConnectionStrings__FarmerzonAuthentication
           value: "UserId=admin;Password=password;Server=farmerzon-authentication-cip;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        - name: AllowedOrigins__0
+          value: "farmerzon.local"
         ports:
         - containerPort: 5000
         livenessProbe:

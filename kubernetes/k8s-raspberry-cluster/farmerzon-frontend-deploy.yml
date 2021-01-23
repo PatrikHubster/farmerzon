@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-frontend-deploy
+  labels:
+    app: microservice-frontend
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-frontend
+  template:
+    metadata:
+      labels:
+        app: microservice-frontend
+    spec:
+      containers:
+      - name: farmerzon-frontend
+        image: patrikhuber/farmerzon-frontend:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: AUTH_SERVER
+          value: "http://api.authentication.farmerzon.local"
+        - name: GRAPH_SERVER
+          value: "http://api.backend.farmerzon.local"
+        ports:
+        - containerPort: 80
