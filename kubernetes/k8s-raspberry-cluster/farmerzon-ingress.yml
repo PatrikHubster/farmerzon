@@ -2,17 +2,19 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: farmerzon-ingress
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - host: api.authentication.farmerzon.local
+    http:
       paths:
-      - path: /authentication
+      - path: /
         backend:
           serviceName: farmerzon-authentication-ingress-cip
           servicePort: 5000
-      - path: /backend
+  - host: api.backend.farmerzon.local
+    http:
+      paths:
+      - path: /
         backend:
           serviceName: farmerzon-backend-ingress-cip
           servicePort: 5000
