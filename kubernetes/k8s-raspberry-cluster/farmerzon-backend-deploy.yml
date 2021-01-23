@@ -30,7 +30,7 @@ spec:
         imagePullPolicy: "Always"
         env:
         - name: AllowedOrigins__0
-          value: "farmerzon.local"
+          value: "http://farmerzon.local"
         ports:
         - containerPort: 5000
         livenessProbe:
