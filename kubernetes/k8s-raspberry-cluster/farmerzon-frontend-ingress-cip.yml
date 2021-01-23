@@ -8,6 +8,6 @@ spec:
   ports:
   - port: 80
     name: microservice-frontend
-  type: NodePort 
+  type: ClusterIP
   selector:
     app: microservice-frontend
