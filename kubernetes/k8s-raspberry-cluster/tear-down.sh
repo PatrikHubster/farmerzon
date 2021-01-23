@@ -2,10 +2,12 @@
 microk8s kubectl delete ingress farmerzon-ingress
 
 # microservice services
+microk8s kubectl delete svc farmerzon-frontend-cip
 microk8s kubectl delete svc farmerzon-backend-ingress-cip
 microk8s kubectl delete svc farmerzon-authentication-ingress-cip
 
 # deployments
+microk8s kubectl delete deploy farmerzon-frontend-deploy
 microk8s kubectl delete deploy farmerzon-backend-deploy
 microk8s kubectl delete deploy farmerzon-address-deploy
 microk8s kubectl delete deploy farmerzon-articles-deploy
