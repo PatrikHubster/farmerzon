@@ -26,7 +26,7 @@ spec:
           serviceName: farmerzon-frontend-ingress-cip
           servicePort: 80
   - host: health.farmerzon.local
-    http:
+    https:
       paths:
       - path: /
         backend:
