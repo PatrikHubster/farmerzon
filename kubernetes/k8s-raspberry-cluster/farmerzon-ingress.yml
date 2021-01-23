@@ -24,4 +24,4 @@ spec:
       - path: /
         backend:
           serviceName: farmerzon-frontend-ingress-cip
-          servicePort: 5000
+          servicePort: 80
