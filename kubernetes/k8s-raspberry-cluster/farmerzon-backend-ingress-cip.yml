@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: farmerzon-backend-np
+  name: farmerzon-backend-ingress-cip
   labels:
     app: microservice-backend
 spec:
