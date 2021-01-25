@@ -1,0 +1,319 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-address-deploy
+  labels:
+    app: microservice-address
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-address
+  template:
+    metadata:
+      labels:
+        app: microservice-address
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "farmerzon-address"
+        dapr.io/app-port: "5000"
+        dapr.io/config: "tracing"
+    spec:
+      containers:
+      - name: farmerzon-address
+        image: patrikhuber/farmerzon-address:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonAddress
+          value: "UserId=postgres;Password='1[Pa$$$$word]1';Server=35.205.60.14;Port=5432;Database=farmerzon-address-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 10
+        readinessProbe:
+          periodSeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 2
+          failureThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-articles-deploy
+  labels:
+    app: microservice-articles
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-articles
+  template:
+    metadata:
+      labels:
+        app: microservice-articles
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "farmerzon-articles"
+        dapr.io/app-port: "5000"
+        dapr.io/config: "tracing"
+    spec:
+      containers:
+      - name: farmerzon-articles
+        image: patrikhuber/farmerzon-articles:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonArticles
+          value: "UserId=postgres;Password='1[Pa$$$$word]1';Server=104.155.83.153;Port=5432;Database=farmerzon-articles-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 10
+        readinessProbe:
+          periodSeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 2
+          failureThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-authentication-deploy
+  labels:
+    app: microservice-authentication
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-authentication
+  template:
+    metadata:
+      labels:
+        app: microservice-authentication
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "farmerzon-authentication"
+        dapr.io/app-port: "5000"
+        dapr.io/config: "tracing"
+    spec:
+      containers:
+      - name: farmerzon-authentication
+        image: patrikhuber/farmerzon-authentication:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: ConnectionStrings__FarmerzonAuthentication
+          value: "UserId=postgres;Password='1[Pa$$$$word]1';Server=35.205.255.64;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+        - name: AllowedOrigins__0
+          value: "http://farmerzon.net"
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 10
+        readinessProbe:
+          periodSeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 2
+          failureThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-backend-deploy
+  labels:
+    app: microservice-backend
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-backend
+  template:
+    metadata:
+      labels:
+        app: microservice-backend
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "farmerzon-backend"
+        dapr.io/app-port: "5000"
+        dapr.io/config: "tracing"
+    spec:
+      containers:
+      - name: farmerzon-backend
+        image: patrikhuber/farmerzon-backend:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: AllowedOrigins__0
+          value: "http://farmerzon.net"
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 10
+        readinessProbe:
+          periodSeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 2
+          failureThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmerzon-frontend-deploy
+  labels:
+    app: microservice-frontend
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: microservice-frontend
+  template:
+    metadata:
+      labels:
+        app: microservice-frontend
+    spec:
+      containers:
+      - name: farmerzon-frontend
+        image: patrikhuber/farmerzon-frontend:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: AUTH_SERVER
+          value: "http://api.authentication.farmerzon.net"
+        - name: GRAPH_SERVER
+          value: "http://api.backend.farmerzon.net"
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: farmerzon-authentication-cip
+  labels:
+    app: microservice-authentication
+spec:
+  ports:
+  - port: 5000
+    name: microservice-authentication
+  type: ClusterIP 
+  selector:
+    app: microservice-authentication
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: farmerzon-backend-cip
+  labels:
+    app: microservice-backend
+spec:
+  ports:
+  - port: 5000
+    name: microservice-backend
+  type: ClusterIP 
+  selector:
+    app: microservice-backend
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: farmerzon-frontend-cip
+  labels:
+    app: microservice-frontend
+spec:
+  ports:
+  - port: 80
+  type: ClusterIP
+  selector:
+    app: microservice-frontend
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: farmerzon-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: farmerzon.net
+    http:
+      paths:
+      - backend:
+          serviceName: farmerzon-frontend-cip
+          servicePort: 80
+        path: /
+  - host: api.authentication.farmerzon.net
+    http:
+      paths:
+      - backend:
+          serviceName: farmerzon-authentication-cip
+          servicePort: 5000
+        path: /
+  - host: api.backend.farmerzon.net
+    http:
+      paths:
+      - backend:
+          serviceName: farmerzon-backend-cip
+          servicePort: 5000
+        path: /
