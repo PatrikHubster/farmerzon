@@ -4,21 +4,21 @@ metadata:
   name: farmerzon-ingress
 spec:
   rules:
-  - host: api.authentication.farmerzon.local
+  - host: api.authentication.raspiancluster.farmerzon.net
     http:
       paths:
       - path: /
         backend:
           serviceName: farmerzon-authentication-ingress-cip
           servicePort: 5000
-  - host: api.backend.farmerzon.local
+  - host: api.backend.raspiancluster.farmerzon.net
     http:
       paths:
       - path: /
         backend:
           serviceName: farmerzon-backend-ingress-cip
           servicePort: 5000
-  - host: farmerzon.local
+  - host: raspiancluster.farmerzon.net
     http:
       paths:
       - path: /
