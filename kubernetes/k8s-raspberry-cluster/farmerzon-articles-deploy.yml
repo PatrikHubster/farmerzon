@@ -33,16 +33,16 @@ spec:
           value: "UserId=postgres;Password='1[Pa$$$$word]1';Server=104.155.83.153;Port=5432;Database=farmerzon-articles-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
         ports:
         - containerPort: 5000
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5000
-          initialDelaySeconds: 10
-        readinessProbe:
-          periodSeconds: 15
-          timeoutSeconds: 2
-          successThreshold: 2
-          failureThreshold: 2
-          httpGet:
-            path: /healthz
-            port: 5000
+        # livenessProbe:
+        #   httpGet:
+        #     path: /healthz
+        #     port: 5000
+        #   initialDelaySeconds: 10
+        # readinessProbe:
+        #   periodSeconds: 15
+        #   timeoutSeconds: 2
+        #   successThreshold: 2
+        #   failureThreshold: 2
+        #   httpGet:
+        #     path: /healthz
+        #     port: 5000

@@ -35,16 +35,16 @@ spec:
           value: "http://raspiancluster.farmerzon.net"
         ports:
         - containerPort: 5000
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5000
-          initialDelaySeconds: 10
-        readinessProbe:
-          periodSeconds: 15
-          timeoutSeconds: 2
-          successThreshold: 2
-          failureThreshold: 2
-          httpGet:
-            path: /healthz
-            port: 5000
+        # livenessProbe:
+        #   httpGet:
+        #     path: /healthz
+        #     port: 5000
+        #   initialDelaySeconds: 10
+        # readinessProbe:
+        #   periodSeconds: 15
+        #   timeoutSeconds: 2
+        #   successThreshold: 2
+        #   failureThreshold: 2
+        #   httpGet:
+        #     path: /healthz
+        #     port: 5000
