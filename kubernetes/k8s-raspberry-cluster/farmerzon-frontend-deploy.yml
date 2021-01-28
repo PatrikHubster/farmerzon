@@ -25,8 +25,8 @@ spec:
         imagePullPolicy: "Always"
         env:
         - name: AUTH_SERVER
-          value: "http://api.authentication.farmerzon.local"
+          value: "http://api.authentication.raspiancluster.farmerzon.net"
         - name: GRAPH_SERVER
-          value: "http://api.backend.farmerzon.local"
+          value: "http://api.backend.raspiancluster.farmerzon.net"
         ports:
         - containerPort: 80
