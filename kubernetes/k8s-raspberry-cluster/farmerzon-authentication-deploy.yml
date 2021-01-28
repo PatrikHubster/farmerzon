@@ -30,7 +30,7 @@ spec:
         imagePullPolicy: "Always"
         env:
         - name: ConnectionStrings__FarmerzonAuthentication
-          value: "UserId=admin;Password=password;Server=farmerzon-authentication-cip;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
+          value: "UserId=postgres;Password='1[Pa$$$$word]1';Server=35.205.255.64;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True"
         - name: AllowedOrigins__0
           value: "http://raspiancluster.farmerzon.net"
         ports:
