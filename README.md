@@ -57,6 +57,41 @@ Configuration:
 | placement | http://localhost:50006 | placement:500006 |
 | redis | http://localhost:6380 | redis:6379 |
 
+# farmerzon hetzner installation
+
+First step is to install docker. Therfor follow [the instructions](https://docs.docker.com/engine/install/ubuntu/) linked here. In the next step install `docker-compose` with `sudo apt install docker-compose`. Use the yml descriptor from this repository in the folder `./docker/deployment-production.yml`. Start this with the command `docker-compose -f deployment-production.yml up`. The [descriptor only exports ports locally](https://www.jeffgeerling.com/blog/2020/be-careful-docker-might-be-exposing-ports-world) with the prefix `127.0.0.1` so that these services are exposed locally and not from the internet.
+
+Ngnix is installed locally to use it in combination with [certbot](https://certbot.eff.org). The [instruction](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx) is linked here as well. The nginx configuratio is located under `/etc/nginx/sites-enabled`. This one has to be configured like shown below:
+
+```conf
+server {
+	listen 80;
+	server_name farmerzon.net;
+	location / {
+		proxy_pass http://localhost:3000;
+	}
+
+}
+
+server {
+    listen 80;
+    server_name api.authentication.farmerzon.net;
+    location / {
+        proxy_pass http://localhost:5000;
+    }
+}
+
+server {
+    listen 80;
+    server_name api.backend.farmerzon.net;
+    location / {
+            proxy_pass http://localhost:5003;
+    }
+}
+```
+
+With the command from the cerbot instruction `sudo certbot --nginx` you can transform them to `https` with a automatic refreshing certificate.
+
 # farmerzon interface testing
 
 In this repository you have a request folder included. Often it is easier to use [Postman](https://www.postman.com) because you can prepare statements to execute. If you want to test with Postman use the included `request.json` to import it in Postman and run the included requests. 
