@@ -90,7 +90,17 @@ server {
 }
 ```
 
-With the command from the cerbot instruction `sudo certbot --nginx` you can transform them to `https` with a automatic refreshing certificate.
+With the command from the cerbot instruction `sudo certbot --nginx` you can transform them to `https` with a automatic refreshing certificate. To access the databases with the psql client you have to install this client locally with the following command:
+
+```console
+user@computer:~$ sudo apt-get install postgres-client
+```
+
+After that you can connect to the databases with the following commmand template
+
+```console
+user@computer:~$ psql -h localhost -p <port> -d <database> -U admin
+```
 
 # farmerzon interface testing
 
