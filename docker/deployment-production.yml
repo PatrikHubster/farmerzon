@@ -106,6 +106,8 @@ services:
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db
     image: postgres
+    ports:
+      - "127.0.0.1:5432:5432"
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
@@ -118,6 +120,8 @@ services:
   farmerzon-articles-db:
     container_name: farmerzon-articles-db
     image: postgres
+    ports:
+      - "127.0.0.1:5433:5432"
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
@@ -130,6 +134,8 @@ services:
   farmerzon-address-db:
     container_name: farmerzon-address-db
     image: postgres
+    ports:
+      - "127.0.0.1:5434:5432"
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
