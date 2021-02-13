@@ -59,4 +59,4 @@ Configuration:
 
 # farmerzon interface testing
 
-In this repository you have a request folder included. Often it is easier to use [Postman]() because you can prepare statements to execute. If you want to test with Postman use the included `request.json` to import it in Postman and run the included requests. 
+In this repository you have a request folder included. Often it is easier to use [Postman](https://www.postman.com) because you can prepare statements to execute. If you want to test with Postman use the included `request.json` to import it in Postman and run the included requests. 
