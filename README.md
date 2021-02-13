@@ -59,7 +59,7 @@ Configuration:
 
 # farmerzon hetzner installation
 
-First step is to install docker. Therfor follow [the instructions](https://docs.docker.com/engine/install/ubuntu/) linked here. In the next step install `docker-compose` with `sudo apt install docker-compose`. Use the yml descriptor from this repository in the folder `./docker/deployment-production.yml`. Start this with the command `docker-compose -f deployment-production.yml up`. The [descriptor only exports ports locally](https://www.jeffgeerling.com/blog/2020/be-careful-docker-might-be-exposing-ports-world) with the prefix `127.0.0.1` so that these services are exposed locally and not from the internet.
+First step is to install docker. Therfor follow [the instructions](https://docs.docker.com/engine/install/ubuntu/) linked here. In the next step install `docker-compose` with `sudo apt install docker-compose`. Use the yml descriptor from this repository in the folder `./docker/deployment-production.yml`. Start this with the command `docker-compose -f deployment-production.yml up --detach`. The [descriptor only exports ports locally](https://www.jeffgeerling.com/blog/2020/be-careful-docker-might-be-exposing-ports-world) with the prefix `127.0.0.1` so that these services are exposed locally and not from the internet.
 
 Ngnix is installed locally to use it in combination with [certbot](https://certbot.eff.org). The [instruction](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx) is linked here as well. The nginx configuratio is located under `/etc/nginx/sites-enabled`. This one has to be configured like shown below:
 

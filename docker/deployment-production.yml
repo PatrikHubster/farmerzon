@@ -4,15 +4,15 @@ services:
   farmerzon-authentication:
     container_name: farmerzon-authentication
     image: patrikhuber/farmerzon-authentication:latest
-    ports: 
-      - 5000:5000
+    ports:
+      - "127.0.0.1:5000:5000"
     depends_on:
       - farmerzon-authentication-db
     networks:
       - farmerzon-network
     environment:
       - ConnectionStrings__FarmerzonAuthentication=UserId=admin;Password=password;Server=farmerzon-authentication-db;Port=5432;Database=farmerzon-authentication-db;IntegratedSecurity=True;Pooling=True;Enlist=True
-      - AllowedOrigins__0=http://localhost:3000
+      - AllowedOrigins__0=https://farmerzon.net
 
   farmerzon-authentication-dapr:
     image: "daprio/daprd:0.11.2"
@@ -27,8 +27,6 @@ services:
   farmerzon-articles:
     container_name: farmerzon-articles
     image: patrikhuber/farmerzon-articles:latest
-    ports:
-      - 5001:5000
     depends_on:
       - farmerzon-articles-db
     networks:
@@ -49,8 +47,6 @@ services:
   farmerzon-address:
     container_name: farmerzon-address
     image: patrikhuber/farmerzon-address:latest
-    ports:
-      - 5002:5000
     depends_on:
       - farmerzon-address-db
     networks:
@@ -72,7 +68,7 @@ services:
     container_name: farmerzon-backend
     image: patrikhuber/farmerzon-backend:latest
     ports:
-      - 5003:5000
+      - "127.0.0.1:5003:5000"
     depends_on:
       - farmerzon-address
       - farmerzon-articles
@@ -80,7 +76,7 @@ services:
     networks:
       - farmerzon-network
     environment:
-      - AllowedOrigins__0=http://localhost:3000
+      - AllowedOrigins__0=https://farmerzon.net
 
   farmerzon-backend-dapr:
     image: "daprio/daprd:0.11.2"
@@ -96,7 +92,7 @@ services:
     container_name: farmerzon-frontend
     image: patrikhuber/farmerzon-frontend:latest
     ports:
-      - 3000:80
+      - "127.0.0.1:3000:80"
     depends_on:
       - farmerzon-address
       - farmerzon-articles
@@ -104,8 +100,8 @@ services:
     networks:
       - farmerzon-network
     environment:
-      - GRAPH_SERVER=http://localhost:5003
-      - AUTH_SERVER=http://localhost:5000
+      - GRAPH_SERVER=https://api.backend.farmerzon.net
+      - AUTH_SERVER=https://api.authentication.farmerzon.net
 
   farmerzon-authentication-db:
     container_name: farmerzon-authentication-db
@@ -116,8 +112,6 @@ services:
       - POSTGRES_DB=farmerzon-authentication-db
     volumes:
        - ./db-authentication/:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
     networks:
       - farmerzon-network
   
@@ -130,8 +124,6 @@ services:
       - POSTGRES_DB=farmerzon-articles-db
     volumes:
        - ./db-articles/:/var/lib/postgresql/data
-    ports:
-      - 5433:5432
     networks:
       - farmerzon-network
 
@@ -144,22 +136,6 @@ services:
       - POSTGRES_DB=farmerzon-address-db
     volumes:
        - ./db-address/:/var/lib/postgresql/data
-    ports:
-      - 5434:5432
-    networks:
-      - farmerzon-network
-
-  farmerzon-recipies-db:
-    container_name: farmerzon-recipies-db
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=farmerzon-recipies-db
-    volumes:
-       - ./db-recipies/:/var/lib/postgresql/data
-    ports:
-      - 5435:5432
     networks:
       - farmerzon-network
 
