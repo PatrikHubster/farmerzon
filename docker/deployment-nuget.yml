@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  packagemanager-baget:
+    container_name: packagemanager-baget
+    image: loicsharma/baget:latest
+    ports:
+      - "127.0.0.1:5555:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+      - ApiKey=VmxPS8LKXk3N3n9CiedB
+      - PackageDeletionBehavior=Unlist
+      - AllowPackageOverwrites=true
+      - Storage__Type=FileSystem
+      - Storage__Path=/var/baget/packages
+      - Database__Type=PostgreSql
+      - Database__ConnectionString=User ID=baget;Password=MPAXHgLSZMP4Kmar3uDv;Host=packagemanager-postgres;Port=5432;Database=baget;
+      - Search__Type=Database
+      - Mirror__Enable=true
+      - Mirror__PackageSource="https://api.nuget.org/v3/index.json"
+    depends_on:
+      - packagemanager-postgres
+    networks:
+      - farmerzon-nuget-network
+    volumes:
+      - ./baget_data/:/var/baget
+
+  packagemanager-postgres:
+    container_name: packagemanager-postgres
+    image: postgres:12.3-alpine
+    ports:
+      - "127.0.0.1:5435:5432"
+    environment:
+      - POSTGRES_USER=baget
+      - POSTGRES_PASSWORD=MPAXHgLSZMP4Kmar3uDv
+      - POSTGRES_DB=baget
+    volumes:
+      - ./db-baget/:/var/lib/postgresql/data
+    networks:
+      - farmerzon-nuget-network
+
+networks:
+  farmerzon-nuget-network:
