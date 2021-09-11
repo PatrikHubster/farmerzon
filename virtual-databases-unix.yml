@@ -39,12 +39,11 @@ services:
 
   farmerzon-recipies-db:
     container_name: farmerzon-recipies-db
-    image: postgres
+    image: mongo
     environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=farmerzon-recipies-db
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_ROOT_USERNAME=admin
     volumes:
-       - ./db-recipies/:/var/lib/postgresql/data
+       - ./db-recipies/:/data/db
     ports:
-      - 5435:5432
+      - 5435:27017
